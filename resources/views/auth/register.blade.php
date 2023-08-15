@@ -1,5 +1,5 @@
 @extends('sistema.layoutAuth')
-@section('title','Cadastro | Estragou, e agora?')
+
 @section('content')
     <div class="row">
         <div class="col-sm-5">
@@ -26,47 +26,37 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            
+                        <div class="row mb-3">                    
                             <label for="email" class="col-md-4 col-form-label text-md-end">
                                 <i class="bi bi-envelope-fill">
                                     <img src="{{asset('storage/imagens/envelope-fill.svg')}}" />
                                 </i>
                             </label>
-
                             <div class="col-md-4">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
-
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <form method="POST" action="{{ route('register') }}"><strong>{{ $message }}</strong></form>
+        <form method="POST" action="{{ route('gravaNovoPedido') }}"><strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                            
                         <div class="row mb-3">
-                            
                             <label for="telefone" class="col-md-4 col-form-label text-md-end">
                                 <i class="bi bi-telephone-fill">
                                     <img src="{{asset('storage/imagens/telephone-fill.svg')}}" />
                                 </i>
                             </label>
-
                             <div class="col-md-4">
-                                <input id="telefone" type="text" class="form-control telefone" name="telefone" required autocomplete="telefone" placeholder="(00) 00000-0000">
-
+                                <input id="telmask" type="text" class="telefone form-control" name="telefone" required autocomplete="telefone" placeholder="(35) 99999-9999">
                             </div>
                         </div>
-
                     <div class="row mb-3">
                         <label for="password" class="col-md-4 col-form-label text-md-end">
                             <i>
                                 <img src="{{ asset('storage/imagens/key-fill.svg') }}" />
                             </i>
                         </label>
-
                         <div class="col-md-4">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Senha (mínimo 8 caracteres)">
 
@@ -77,38 +67,30 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <label for="password-confirm" class="col-md-4 col-form-label text-md-end">
                             <i>
                                 <img src="{{ asset('storage/imagens/key-fill.svg') }}" />
                             </i>
                         </label>
-
                         <div class="col-md-4">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirmar senha">
                         </div>
                     </div>
-
                     <div class="row mb-3">
                             <label for="tipo" class="col-md-4 col-form-label text-md-end">
                                 <i>
                                     <img src="{{asset('storage/imagens/person-bounding-box.svg')}}" />
                                 </i>
                             </label>
-
                             <div class="col-md-6">
                                 <select name="tipo" require="required" style="width:'50%'; border-radius: 5px;" id="tipo">
                                         <option value="">Tipo de Usuário</option>
-                                        <option value="1">Cliente</option>
-                                        <option value="2">Prestador de Serviço</option>
+                                        <option value="Cliente">Cliente</option>
+                                        <option value="Prestador">Prestador de Serviço</option>
                                 </select>
                             </div>
-                    </div>@hasSection('javascript')
-        @yield('javascript')
-    @endif
-</body>
-                    
+                    </div>
                     <div class="h5 text-center">
                         <p style="color: white" id="titulo"><b>Já tem uma conta? <a style="color: #F2AA31" href="{{ route('login') }}">Faça Login</a></b></p>
                     </div>
@@ -121,13 +103,12 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('javascript')
-<script>
-    $(document).ready(function($){
-       $('#telefone').mask('(00) 00000-0000');
-    });
-</script>
-
+    <script type="module">
+        $().ready(function () {
+            let telmask = new Inputmask ('(99) 99999-9999')
+            telmask.mask("#telmask");
+        });
+    </script>
 @endsection
