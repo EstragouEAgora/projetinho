@@ -1,0 +1,88 @@
+<nav class="navbar fixed-top" style="background-color: #3C5BBF">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <div style="display: inline-block;">
+        <img src="{{asset('storage/imagens/logo.png')}}" id="logo-dash">
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggle">
+        <img src="{{asset('storage/imagens/')}}" style="width: 80px; border-radius: 100px" />
+      </span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-white" style="background-color: #3C5BBF" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white"><b>Estragou, e agora?</b></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <div>
+                <p style="color: white; font-size: 20px"><b>{{ Auth::user()->name }}</b></p>
+                <p style="color: white; font-size: 15px" >{{ Auth::user()->email}}<p> 
+            </div>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                <a class="nav-link" href="/home" id="navbar-topicos-nome">
+                <i class="bi bi-house">
+                  <img src="{{asset('storage/imagens/house.svg')}}" />
+                </i>
+                Home
+              </a>
+          </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+            <a class="nav-link" href="/suporteDash" id="navbar-topicos-nome">
+            <i class="bi bi-headset">
+              <img src="{{asset('storage/imagens/headset.svg')}}" />
+            </i>
+            Suporte
+          </a>
+        </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+            <a class="nav-link" href="/funcionalidadesDash" id="navbar-topicos-nome">
+            <i class="bi bi-link-45deg">
+              <img src="{{asset('storage/imagens/link.svg')}}" />
+            </i>
+            Funcionalidades
+          </a>
+        </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">           
+              <a class="nav-link" href="/ajuda" id="navbar-topicos-nome">
+              <i class="bi bi-question-circle-fill">
+                <img src="{{asset('storage/imagens/question-circle-fill.svg')}}" />
+              </i>
+              Ajuda
+              </a>
+          </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+              <a class="nav-link" href="/config" id="navbar-topicos-nome">
+              <i class="bi bi-gear">
+                <img src="{{asset('storage/imagens/settings.svg')}}" />
+              </i>
+              Configurações
+            </a>
+          </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+            <a class="nav-link" href="/perfil" id="navbar-topicos-nome">
+            <i class="bi bi-gear">
+              <img src="{{asset('storage/imagens/profile.svg')}}" />
+            </i>
+            Perfil
+          </a>
+        </li>
+          <li class="nav-item active flex-sm-fill" id="navbar-topicos">      
+              <a class="nav-link" href="{{ route('logout') }}" id="navbar-topicos-nome" 
+              onclick = "event.preventDefault();document.getElementById('logout-form').submit();">
+              <i class="bi bi-box-arrow-right">
+                <img src="{{asset('storage/imagens/logout.svg')}}" />
+              </i> 
+                {{__ ('Logout') }}
+              </a>
+              <form id = "logout-form" action = "{{ route('logout') }}" method = "POST" class = "d-none">
+                @csrf
+              </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

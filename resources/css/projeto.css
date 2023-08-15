@@ -1,0 +1,199 @@
+.nav-link-black {
+    color: #000000;
+  }
+
+#logo {
+    width:80px;
+    height: 80px;
+    margin-left: 15px;
+}
+
+#botao-de-cadastro {
+  position: relative;
+  background-color: transparent;
+  color:#3C5BBF;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#botao-de-cadastro:hover{ 
+  background-color: #3C5BBF;
+  color: white;
+  transform: translateY(-5px);
+
+}
+#botao-de-login {
+  background-color: #3C5BBF;
+  border-color: #3C5BBF;
+  margin-right: 15px;cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#botao-de-login:hover{ 
+  background-color: var(--primary);
+  color: #3C5BBF;
+  transform: translateY(-5px);
+
+}
+
+#botao-cad-login {
+  color: #F2AA31;
+  background-color: #3C5BBF;
+  margin-left: 50px;
+  border: solid;
+  border-color: #F2AA31;
+  border-width: 1px;
+  width: 200px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#botao-cad-login:hover{
+  background-color: var(--primary);
+  color: #F2AA31;
+  transform: translateY(-5px);
+
+
+}
+#index-titulo {
+    font-size: 120px;
+    margin-left: 90px;
+}
+
+#index-slogan {
+    color: #3C5BBF;
+    font-size: 30px;
+    margin-left: 90px;
+    margin-bottom: 10px;
+}
+
+#index-bicho {
+    height: 800px;
+    margin-left: 80px;
+}
+
+#index-ondas {
+    width: 1900px;
+}
+
+#logo-dash {
+    width:70px;
+    height: 70px;
+    margin-left: 10px;
+}
+
+#menu-navbar {
+  background-color: #3C5BBF;
+  border-color: #3C5BBF;
+  color: white;
+}
+
+#navbar-topicos {
+  list-style-type: none;
+    margin: 10px;
+}
+
+#navbar-topicos-nome {
+  font-weight: bold;
+    color: white;
+}
+
+#titulo-da-pagina {
+    color: #3C5BBF;
+    font-size: 45px;
+    margin-top: 20px;
+}
+
+#subtitulo-da-pagina {
+    color: #ABAEB7;
+    font-size: 15px;
+}
+
+#func-topicos {
+    font-size: 15px;
+}
+
+#link-sem-sublinhado {
+  text-decoration: none;
+} 
+
+#card-prestador {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 18rem ;
+  width: 18rem; 
+  background-color: white;
+  padding-top: 10px;
+  border-radius: 100px;
+}
+
+#card-descricao-texto-simples {
+  color: #000000;
+  font-size: 15px;
+}
+
+#img-card {
+  width: 60px;
+  height: 60px;
+}
+
+#card-descricao-destaque {
+  color: #000000;
+  font-size: 25px;
+}
+
+#ladinho {
+  flex-direction: row;
+  align-items: center;
+}
+
+#card-dash-cliente {
+    width: 20rem;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+#txt-card-dash-cliente {
+    color: #ABAEB7;
+}
+
+#card-descricao-servico {
+    width: 800px;
+    padding-top: 10px;
+}
+
+#card-descricao-label {
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#card-descricao-label-subtitulo {
+    color: #ABAEB7;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#card-descricao-valor {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30%;
+    border-radius: 40px;
+   
+}
+
+#botaozin-padrao {
+    color: white;
+    background-color:#3C5BBF;
+    border-radius: 85px;
+    margin: 15px;
+}
+
+#botaozin-aceito {
+  background-color:#019320;
+  border-radius: 85px;
+  margin: 15px;
+  color: white;
+}
+
