@@ -90,7 +90,14 @@
 #navbar-topicos {
   list-style-type: none;
     margin: 10px;
+    cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+#navbar-topicos:hover {
+  background-color: var(--primary);
+  color: #F2AA31;
+  transform: translateY(-5px);}
+
 
 #navbar-topicos-nome {
   font-weight: bold;
@@ -152,10 +159,11 @@
     width: 20rem;
     padding-top: 20px;
     margin-left: 20px;
+  
 }
 
 #txt-card-dash-cliente {
-    color: #ABAEB7;
+    color: #3C5BBF;
 }
 
 #card-descricao-servico {
@@ -188,8 +196,15 @@
     background-color:#3C5BBF;
     border-radius: 85px;
     margin: 15px;
+    cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-color: #3C5BBF;
 }
 
+#botaozin-padrao:hover {
+
+  transform: translateY(-5px);
+}
 #botaozin-aceito {
   background-color:#019320;
   border-radius: 85px;

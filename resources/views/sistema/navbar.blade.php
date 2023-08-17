@@ -12,7 +12,7 @@
     </button>
     <div class="offcanvas offcanvas-end text-bg-white" style="background-color: #3C5BBF" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white"><b>Estragou, e agora?</b></h5>
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; font-size: 25px;"><b>Estragou, e agora?</b></h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
