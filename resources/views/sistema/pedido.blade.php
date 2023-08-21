@@ -33,11 +33,12 @@
         </form>
     </div>
 @endsection
-
 @section('javascript')
-<script>
-    $(document).ready(function() { // Corrija a função
-        $('#valorPedido').mask('R$ 999,99');
-    });
-</script>
+    <script type="module">
+        $().ready(function () {
+            let valorPedido = new Inputmask ('R$ 9999.99')
+            valorPedido.mask("#valorPedido");
+        });
+    </script>
 @endsection
+

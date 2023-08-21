@@ -2,7 +2,7 @@
 @section('title', 'Perfil | Editar Informações Pessoais')
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-center align-items-center" style="">
+    <div class="d-flex justify-content-center align-items-center">
         <div class="text-center">
             <img src="{{ asset('storage/imagens/person-fill.svg') }}" style="width: 250px; border-radius: 100px; margin-top: 55px;" />
             <h4 style="color: #38393C; font-size: 35px">{{ Auth::user()->name }}</h4>
@@ -10,9 +10,10 @@
         </div>
     </div>
     <div class="card" id="editar-perfil">
-        <form method="POST" action="{{ route('gravaNovoPedido') }}" >
+        <form method="POST" action="{{ route('gravaNovoPedido') }}">
             @csrf
             @method('PUT')
+
             <label for="name">
                 <p class="h4">Nome:</p>
             </label>
@@ -21,24 +22,31 @@
             </div>
 
             <label for="email">
-                <p class="h4" style= "margin-top: 20px">Email:</p>
+                <p class="h4" style="margin-top: 20px">Email:</p>
             </label>
             <div>
                 <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required autocomplete="email" style="border-radius: 40px; background-color: #ffff">
             </div>
 
             <label for="phone">
-                <p class="h4" style= "margin-top: 20px">Telefone:</p>
+                <p class="h4" style="margin-top: 20px">Telefone:</p>
             </label>
             <div>
-                <input type="tel" class="form-control" name="phone" value="{{ Auth::user()->phone }}" autocomplete="tel" style="border-radius: 40px; background-color: #ffff">
+                <input id="telmask" type="text" class="telefone form-control" name="telefone" value="{{ Auth::user()->telefone }}" required autocomplete="telefone" style="border-radius: 40px; background-color: #ffff">
             </div>
 
             <label for="password">
-                <p class="h4" style= "margin-top: 20px">Senha:</p>
+                <p class="h4" style="margin-top: 20px">Senha:</p>
             </label>
             <div>
                 <input type="password" class="form-control" name="password" autocomplete="new-password" style="border-radius: 40px; background-color: #ffff">
+            </div>
+
+            <label for="password_confirmation">
+                <p class="h4" style="margin-top: 20px">Confirmar Senha:</p>
+            </label>
+            <div>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" style="border-radius: 40px; background-color: #ffff">
             </div>
 
             <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
@@ -52,4 +60,10 @@
         </form>
     </div>
 </div>
+<script type="module">
+    $().ready(function () {
+        let telmask = new Inputmask('(99) 99999-9999')
+        telmask.mask("#telmask");
+    });
+</script>
 @endsection
