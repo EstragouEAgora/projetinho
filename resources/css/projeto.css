@@ -107,7 +107,7 @@
 #titulo-da-pagina {
     color: #3C5BBF;
     font-size: 45px;
-    margin-top: 20px;
+    margin-top: 55px;
 }
 
 #subtitulo-da-pagina {
@@ -212,3 +212,11 @@
   color: white;
 }
 
+#editar-perfil {
+  width: 900px;
+  padding-top: 20px;
+ margin-top: 60px;
+  background-color: #f8fafc;
+  border-color: #f8fafc ;
+  margin-left: 160px;
+}

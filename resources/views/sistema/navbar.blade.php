@@ -5,11 +5,18 @@
         <img src="{{asset('storage/imagens/logo.png')}}" id="logo-dash">
       </div>
     </a>
+    <i class="bi bi-bell" style= "margin-left: 1500px ">
+              <img src="{{asset('storage/imagens/bell.svg')}}" />
+    </i>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggle">
         <img src="{{asset('storage/imagens/')}}" style="width: 80px; border-radius: 100px" />
       </span>
     </button>
+    <div>
+            <p style="color: white; font-size: 20px"><b>{{ Auth::user()->name }}</b></p>
+            <p style="color: white; font-size: 15px">{{ Auth::user()->email}}</p> 
+          </div>
     <div class="offcanvas offcanvas-end text-bg-white" style="background-color: #3C5BBF" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; font-size: 25px;"><b>Estragou, e agora?</b></h5>
@@ -53,14 +60,8 @@
               Ajuda
               </a>
           </li>
-          <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-              <a class="nav-link" href="/config" id="navbar-topicos-nome">
-              <i class="bi bi-gear">
-                <img src="{{asset('storage/imagens/settings.svg')}}" />
-              </i>
-              Configurações
-            </a>
-          </li>
+         
+          
           <li class="nav-item active flex-sm-fill" id="navbar-topicos">
             <a class="nav-link" href="/perfil" id="navbar-topicos-nome">
             <i class="bi bi-gear">
