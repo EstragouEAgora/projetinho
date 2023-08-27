@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Servico;
+use App\Models\User_Servico;
 
 use Illuminate\Http\Request;
 
@@ -63,6 +64,15 @@ class controladorServico extends Controller
     
     public function destroy(string $id)
     {
-        //
-    }
+        $dados = Servico::find($id);
+        $user_ser = User_Servico::all();
+        if(isset($dados)){ 
+            if($id == $user_ser->servico_id){
+                return redirect()->with('danger', 'Erro ao tentar atualizar cadastro!');
+            } else {
+                $foto = $dados->fotoServico
+                Storage::disk('public')->delete ($foto);
+                $dados->delete();
+                return redirect();
+        }
 }
