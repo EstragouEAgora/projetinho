@@ -22,7 +22,7 @@ class HomeController extends Controller
         if(Auth::user() -> tipo =='2'){
             return view('sistema.dashboardPrestador');
         }
-        if(Auth::user() -> tipo =='adm'){
+        if(Auth::user() -> tipo =='3'){
             return view('sistema.dashboardAdm');
         }
         
