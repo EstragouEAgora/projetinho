@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Candidatos;
 
 class controladorCandidatos extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $dados = Candidatos::all();
+        return view('', compact('dados');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -27,7 +24,14 @@ class controladorCandidatos extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = new Candidatos();
+        $dados->user_id = ;
+        $dados->pedido_id = ;
+        $dados->novoValor = $request->input('novoValor');
+        $dados->status = 0;
+        $dados->save();
+        return redirect();
+        
     }
 
     /**
@@ -51,7 +55,13 @@ class controladorCandidatos extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dados = Candidados::find($id);
+        if(isset($dados)){
+            $dados->status = 1;
+            $dados->save();
+        } else {
+            return redirect();
+        }
     }
 
     /**
