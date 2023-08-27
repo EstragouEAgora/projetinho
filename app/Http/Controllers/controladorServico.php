@@ -24,10 +24,12 @@ class controladorServico extends Controller
     
     public function store(Request $request)
     {
+        $path = $request -> file('fotoServico') -> store('imagens', 'public');
         $dados = new Servico();
         $dados->nomeServico = $request->input('nomeServico');
+        $dados->fotoServico = $path;
         $dados->save();
-        return redirect('')->with('success', 'Novo servico cadastrado com sucesso!');
+        return redirect('/')->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
     
@@ -41,19 +43,19 @@ class controladorServico extends Controller
     {
         $dados = Servico::find($id);
         if(isset($dados)){
-            $dados->nomeServico=$request->input('nomeServico');
-            $dados->save();
+            return view();
         } else {
             return redirect()->with('danger', 'Erro ao tentar atualizar cadastro!');
         }
-        return redirect()->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     
     public function update(Request $request,$id)
     {
+        $path = $request -> file('fotoServico') -> store('imagens', 'public');
         $dados= Servico::findOrFail($id);
         $dados->nomeServico = $request->input('nomeServico');
+        $dados->fotoServico = $path;
         $dados->save();
         return redirect()->route('', $dados->id);
     }
