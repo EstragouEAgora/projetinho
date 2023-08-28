@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Servico extends Model
 {
     use HasFactory;
-    protected $fillable=['nomeServico'];
+    protected $fillable=['nomeServico','fotoServico'];
 
     public function user_servico(){
         return $this->howMany(User_Servico::class);
