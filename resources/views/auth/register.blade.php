@@ -86,8 +86,8 @@
                             <div class="col-md-6">
                                 <select name="tipo" require="required" style="width:'50%'; border-radius: 5px;" id="tipo">
                                         <option value="">Tipo de Usuário</option>
-                                        <option value="Cliente">Cliente</option>
-                                        <option value="Prestador">Prestador de Serviço</option>
+                                        <option value=1>Cliente</option>
+                                        <option value=2>Prestador de Serviço</option>
                                 </select>
                             </div>
                     </div>

@@ -70,9 +70,11 @@ class controladorServico extends Controller
             if($id == $user_ser->servico_id){
                 return redirect()->with('danger', 'Erro ao tentar atualizar cadastro!');
             } else {
-                $foto = $dados->fotoServico
+                $foto = $dados->fotoServico;
                 Storage::disk('public')->delete ($foto);
                 $dados->delete();
                 return redirect();
+            }
         }
+    }
 }
