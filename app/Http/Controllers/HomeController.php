@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Pedido;
+use App\Models\Servico;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,13 @@ class HomeController extends Controller
         if(Auth::user() -> tipo =='3'){
             return view('sistema.dashboardAdm');
         }
+        
+    }
+
+    public function pedidoPersonalizado($servico_id)
+    {
+        $dados = Servico::find($servico_id);
+        return view('sistema.pedido',compact($dados));       
         
     }
 }

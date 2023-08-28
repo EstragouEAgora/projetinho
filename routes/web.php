@@ -21,9 +21,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/pedido/{servico_id}', [App\Http\Controllers\HomeController::class, 'pedidoPersonalizado'])->name('pedido');
+
 Route::get('/servicos/novo', [App\Http\Controllers\controladorServico::class, 'create'])->name('novoServico');
 
 Route::post('/pedido/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
+
+Route::post('/servico', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');
 
 Route::get('/sobre', function () {
     return view('sistema.sobre');
@@ -61,7 +65,7 @@ Route::get('/ajuda', function () {
     return view('sistema.ajuda');
 });
 
-Route::get('/pedido', function () {
+Route::get('/pedidos', function () {
     return view('sistema.pedido');
 });
 

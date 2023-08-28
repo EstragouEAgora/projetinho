@@ -14,12 +14,22 @@
             @csrf
             @method('PUT')
 
+
+            <label for="apelido">
+                <p class="h4">Apelido:</p>
+            </label>
+            <div>
+                <input type="text" class="form-control" name="apelido" value="{{ Auth::user()->apelido }}" required autocomplete="apelido" style="border-radius: 40px; background-color: #ffff">
+            </div>
+
+
             <label for="name">
                 <p class="h4">Nome:</p>
             </label>
             <div>
                 <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required autocomplete="name" style="border-radius: 40px; background-color: #ffff">
             </div>
+
 
             <label for="email">
                 <p class="h4" style="margin-top: 20px">Email:</p>

@@ -25,12 +25,12 @@ class controladorServico extends Controller
     
     public function store(Request $request)
     {
-        $path = $request -> file('fotoServico') -> store('imagens', 'public');
+        $path = $request->file('fotoServico')->store('imagens', 'public');
         $dados = new Servico();
         $dados->nomeServico = $request->input('nomeServico');
         $dados->fotoServico = $path;
         $dados->save();
-        return redirect('/')->with('success', 'Novo servico cadastrado com sucesso!');
+        return redirect('sistema.dashboardAdm')->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
     

@@ -5,12 +5,12 @@
         <img src="{{asset('storage/imagens/logo.png')}}" id="logo-dash">
       </div>
     </a>
-    <i class="bi bi-bell" style= "margin-left: 1500px ">
+    <i class="bi bi-bell" style= "margin-left: 1000px ">
               <img src="{{asset('storage/imagens/bell.svg')}}" />
     </i>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggle">
-        <img src="{{asset('storage/imagens/')}}" style="width: 80px; border-radius: 100px" />
+        <img src="{{asset('storage/imagens/clientePadrao.png')}}" style="width: 40px; border-radius: 100px; " />
       </span>
     </button>
     <div>
