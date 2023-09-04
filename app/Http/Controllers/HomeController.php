@@ -30,13 +30,6 @@ class HomeController extends Controller
         
     }
 
-    public function pedidoPersonalizado($servico_id)
-    {
-        $dados = Servico::find($servico_id);
-        return view('sistema.pedido.pedido',compact($dados));       
-        
-    }
-
     public function avaliacao()
     {
         $tudo = Auth::all();

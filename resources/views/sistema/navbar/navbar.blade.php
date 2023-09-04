@@ -7,23 +7,25 @@
         </a>
         <div class="d-flex justify-content-end align-items-center" style="">
             <div>
-                <i class="bi bi-bell">
+                <i class="bi bi-bell" style="margin-right: 20px">
                     <img src="{{ asset('storage/imagens/bell.svg') }}" />
                 </i>
             </div>
             <div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-label="Toggle navigation">
+                    aria-label="Toggle navigation" style="border: none; margin-right: 13px">
                     <span class="navbar-toggle">
                         <img src="{{ asset('storage/imagens/clientePadrao.png') }}"
                             style="width: 40px; border-radius: 100px; " />
                     </span>
                 </button>
             </div>
-            <div class="text-center">
-                <p style="color: white; font-size: 20px"><b>{{ Auth::user()->name }}</b></p>
-                <p style="color: white; font-size: 15px">{{ Auth::user()->email }}</p>
+            <div style="margin-right: 24px;">
+                <p style="color: white; font-size: 20px; cursor: pointer;" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar"><b>{{ Auth::user()->name }}</b></p>
+                <p style="color: white; font-size: 15px; margin-top: -20px; cursor: pointer;" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar">{{ Auth::user()->email }}</p>
             </div>
         </div>
     </div>

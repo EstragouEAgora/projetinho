@@ -21,11 +21,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/pedido/{servico_id}', [App\Http\Controllers\HomeController::class, 'pedidoPersonalizado'])->name('pedido');
+Route::get('/pedido/{servico_id}', [App\Http\Controllers\controladorPedido::class, 'create'])->name('pedido');
 
 Route::get('/servicos/novo', [App\Http\Controllers\controladorServico::class, 'create'])->name('novoServico');
 
 Route::post('/pedido/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
+
+Route::get('/pedido/descricao', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
 
 Route::post('/servico', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');
 

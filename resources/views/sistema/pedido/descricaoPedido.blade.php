@@ -5,10 +5,10 @@
     <p id="subtitulo-da-pagina">Aqui está a descrição do serviço solicitado pelo cliente para você! Sinta-se à vontade para ajustar o campo de valor de acordo com o preço do serviço que você irá oferecer.</p>
     <div class="card" id="card-descricao-servico">
             <p class="h4" style="font-size: 18px; margin-left: 10px">Descrição do serviço:</p>
-            <p style="font-size: 18px; margin-left: 10px">AAAAAA</p>
+            <p style="font-size: 18px; margin-left: 10px">{{$dados['descricao']}}</p>
             <p class="h4" id="card-descricao-label"><b>Valor (R$):</b></p>
         <div id="card-descricao-valor">
-            <input id="dinheiro" type="text" name="dinheiro" class="form-control" style="border-radius: 40px; background-color: #EFF2FB">
+            <input id="dinheiro" type="text" name="dinheiro" class="form-control" style="border-radius: 40px; background-color: #EFF2FB" value="{{$dados['valor'])}}">
         
             </div>
             <div style="display: flex; justify-content: flex-end;">

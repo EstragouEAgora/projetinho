@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Servico;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class controladorPedido extends Controller
@@ -20,9 +22,14 @@ class controladorPedido extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($servico_id)
     {
-        return view('/pedidos');
+        $dados = Servico::find($servico_id);
+        if (isset($dados)){
+            return view('sistema.pedido.pedido',compact('dados'));       
+        } else {
+            return view('sistema.dashboard.dashboardClient');
+        }
     }
 
     /**
@@ -31,10 +38,20 @@ class controladorPedido extends Controller
     public function store(Request $request)
     {
         $dados = new Pedido();
+        $user = Auth::find($user_id);
+        $dados->user_id = $user;
+        $idSer = session('idSer');
+        $dados->servico_id = $idSer;
         $dados->descricaoPedido = $request->input('descricaoPedido');
-        $dados->valorPedido = $request->input('valorPedido');
-        $dados->save();
-        return redirect('/dashboardCliente');
+        $valorPedido = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
+        $dados->valorPedido = (double)$valorPedido;
+        if(isset($dados)){
+            $dados->save();
+            return redirect('/dashboardCliente')->with('success');
+        } else {
+            return redirect('/dashboardCliente')->with('danger');
+        }
+        
     }
 
     /**
@@ -42,7 +59,11 @@ class controladorPedido extends Controller
      */
     public function show(string $id)
     {
-        //
+        $pedidos = Pedido::all();
+        if($pedidos->servico_id = 3){
+            $dados = array('descricao' => $pedidos->descricaoPedido, 'valor' => $pedidos->valorPedido);
+        }
+        return view('sistema.pedido.descricaoPedido',compact($dados));       
     }
 
     /**
