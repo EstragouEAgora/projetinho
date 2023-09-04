@@ -16,6 +16,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/1" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -27,6 +30,8 @@
             </div>
 
 
+
+
             <div class="col-md-3 mb-3">
                 <div class="card" id="card-dash-cliente">
                     <div class="row">
@@ -35,6 +40,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/2" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -47,6 +55,8 @@
             </div>
 
 
+
+
             <div class="col-md-3 mb-3">
                 <div class="card" id="card-dash-cliente">
                     <div class="row">
@@ -55,6 +65,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/3" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -67,6 +80,8 @@
             </div>
 
 
+
+
             <div class="col-md-3 mb-3">
                 <div class="card" id="card-dash-cliente">
                     <div class="row">
@@ -75,6 +90,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/3" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -92,6 +110,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/3" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -109,12 +130,16 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/3" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
                             </a>
                         </div>
-                        <img src="{{ asset('storage/imagens/limCG.png') }}" class="card-img-top" alt="JardineiroExemplo">
+                        <img src="{{ asset('storage/imagens/limCG.png') }}" class="card-img-top"
+                            alt="JardineiroExemplo">
                     </div>
                 </div>
             </div>
@@ -126,6 +151,9 @@
                         </div>
                         <div class="col text-end">
                             <a href="/excluir-servico/3" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
                                 <i class="bi bi-trash3-fill">
                                     <img src="{{ asset('storage/imagens/trash.svg') }}">
                                 </i>
@@ -136,6 +164,8 @@
                     </div>
                 </div>
             </div>
+
+
 
 
         </div>

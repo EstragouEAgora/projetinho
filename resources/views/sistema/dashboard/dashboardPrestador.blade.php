@@ -1,6 +1,7 @@
 @extends('sistema.layout.layoutDash')
 @section('title','Home | Estragou, e agora?')
 @section('content')
+<div class="container" style="margin-top: 150px">
     <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços para você</b></p>
     <p id="subtitulo-da-pagina">Os serviços que selecionamos para você!</p>
     </div>

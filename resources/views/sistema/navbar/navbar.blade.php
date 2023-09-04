@@ -30,6 +30,8 @@
 </nav>
 
 
+
+
 <div class="offcanvas offcanvas-end text-bg-white" style="background-color: #3C5BBF" tabindex="-1"
     id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
     <div class="offcanvas-header">
@@ -51,6 +53,14 @@
                         <img src="{{ asset('storage/imagens/house.svg') }}" />
                     </i>
                     Home
+                </a>
+            </li>
+            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                <a class="nav-link" href="{{ route('avaliaCliente') }}" id="navbar-topicos-nome">
+                    <i class="bi bi-house">
+                        <img src="{{ asset('storage/imagens/star_avaliacao.svg') }}" />
+                    </i>
+                    Avaliação
                 </a>
             </li>
             <li class="nav-item active flex-sm-fill" id="navbar-topicos">

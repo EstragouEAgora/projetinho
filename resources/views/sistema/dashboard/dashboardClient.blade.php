@@ -1,7 +1,7 @@
 @extends('sistema.layout.layoutDash')
 @section('title', 'Home | Estragou, e agora?')
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 150px">
     <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços Disponíveis</b></p>
     <p id="subtitulo-da-pagina">Explore nossos serviços disponíveis e selecione aquele que melhor atende às suas necessidades.  Estamos aqui para oferecer soluções especialmente para você!</p>
 
@@ -16,7 +16,7 @@
         </div>
 
         <div class="col-md-3 mb-3">
-            <div class="card" id="card-dash-cliente">
+            <div class="card" id="card-dash-cliente">'
                 <a href="/pedido/2" id="link-sem-sublinhado">
                     <p id="txt-card-dash-cliente"><b>Eletricista</b></p>
                     <img src="{{asset('storage/imagens/eletricista.png')}}" class="card-img-top" alt="EletricistaExemplo">

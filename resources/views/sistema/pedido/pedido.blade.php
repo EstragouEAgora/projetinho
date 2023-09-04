@@ -1,7 +1,7 @@
 @extends('sistema.layout.layoutDash')
 @section('title','Pedido | Estragou, e agora?')
 @section('content')
-    <p class="h1 text-start" id="titulo-da-pagina"><b>Solicitar Serviço</b></p>
+    <p class="h1 text-start" id="titulo-da-pagina"><b>{{$dados('nomeServico')}}</b></p>
     <p id="subtitulo-da-pagina"></p>
     <div class="card" id="card-descricao-servico">
         <form method="POST" action="{{ route('gravaNovoPedido') }}">

@@ -36,4 +36,17 @@ class HomeController extends Controller
         return view('sistema.pedido.pedido',compact($dados));       
         
     }
+
+    public function avaliacao()
+    {
+        $tudo = Auth::all();
+        foreach ($tudo as $item){
+            if ($item-> tipo == '2'){
+                $dados = $item;
+            }
+        }
+        return view('sistema.avaliacao.avaliacaoCliente', compact('dados'));
+    }
+
+
 }

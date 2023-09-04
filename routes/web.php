@@ -29,6 +29,9 @@ Route::post('/pedido/enviar', [App\Http\Controllers\controladorPedido::class, 's
 
 Route::post('/servico', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');
 
+Route::get('/avaliacao', [App\Http\Controllers\HomeController::class, 'avaliacao'])->name('avaliaCliente');
+
+
 Route::get('/sobre', function () {
     return view('sistema.sobre');
 });
