@@ -19,13 +19,13 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user() -> tipo =='1'){
-            return view('sistema.dashboardClient');
+            return view('sistema.dashboard.dashboardClient');
         }   
         if(Auth::user() -> tipo =='2'){
-            return view('sistema.dashboardPrestador');
+            return view('sistema.dashboard.dashboardPrestador');
         }
         if(Auth::user() -> tipo =='3'){
-            return view('sistema.dashboardAdm');
+            return view('sistema.dashboard.dashboardAdm');
         }
         
     }
@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function pedidoPersonalizado($servico_id)
     {
         $dados = Servico::find($servico_id);
-        return view('sistema.pedido',compact($dados));       
+        return view('sistema.pedido.pedido',compact($dados));       
         
     }
 }

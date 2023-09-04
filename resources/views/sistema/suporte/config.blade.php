@@ -1,4 +1,4 @@
-@extends('sistema.layoutDash')
+@extends('sistema.layout.layoutDash')
 @section('title','Dashboard | Estragou, e agora?')
 @section('content')
     <div style="display: inline-block; align-items: 'center'; margin: 10px">

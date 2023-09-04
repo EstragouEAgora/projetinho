@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-    @component('sistema.navbarInicial')
+    @component('sistema.navbar.navbarInicial')
     @endcomponent
     <main role="main" class="py-4">
         @hasSection('content')

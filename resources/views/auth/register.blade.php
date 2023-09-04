@@ -1,4 +1,4 @@
-@extends('sistema.layoutAuth')
+@extends('sistema.layout.layoutAuth')
 
 @section('content')
     <div class="row">

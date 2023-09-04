@@ -1,4 +1,4 @@
-@extends('sistema.layoutDash')
+@extends('sistema.layout.layoutDash')
 @section('title','Pedido | Estragou, e agora?')
 @section('content')
     <p class="h1 text-start" id="titulo-da-pagina"><b>Solicitar Serviço</b></p>

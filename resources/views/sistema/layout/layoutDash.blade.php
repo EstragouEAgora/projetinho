@@ -10,7 +10,7 @@
 <body>
     <div class="row">
         <div class="col-sm-10">
-            @component('sistema.navbar')
+            @component('sistema.navbar.navbar')
             @endcomponent
         </div>
         <div style="margin-top: 100px">

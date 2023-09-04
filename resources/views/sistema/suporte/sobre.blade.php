@@ -1,4 +1,4 @@
-@extends('sistema.layout')
+@extends('sistema.layout.layout')
 @section('title','Home | Estragou, e agora?')
 @section('content')
     <div class="container">

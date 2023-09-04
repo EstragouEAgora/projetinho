@@ -1,4 +1,4 @@
-@extends('sistema.layoutDash')
+@extends('sistema.layout.layoutDash')
 
 @section('title','Pedido | Estragou, e agora?')
 @section('content')

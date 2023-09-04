@@ -34,19 +34,19 @@ Route::get('/sobre', function () {
 });
 
 Route::get('/funcionalidades', function () {
-    return view('sistema.funcionalidades');
+    return view('sistema.suporte.funcionalidades');
 });
 
 Route::get('/funcionalidadesDash', function () {
-    return view('sistema.funcionalidadesDash');
+    return view('sistema.suporte.funcionalidadesDash');
 });
 
 Route::get('/suporte', function () {
-    return view('sistema.suporte');
+    return view('sistema.suporte.suporte');
 });
 
 Route::get('/suporteDash', function () {
-    return view('sistema.suporteDash');
+    return view('sistema.suporte.suporteDash');
 });
 
 Route::get('/dashboardCliente', function () {
@@ -62,21 +62,21 @@ Route::get('/dashboardAdm', function () {
 });
 
 Route::get('/ajuda', function () {
-    return view('sistema.ajuda');
+    return view('sistema.suporte.ajuda');
 });
 
 Route::get('/pedidos', function () {
-    return view('sistema.pedido');
+    return view('sistema.pedido.pedido');
 });
 
 Route::get('/perfil', function () {
-    return view('sistema.profile');
+    return view('auth.profile');
 });
 
 Route::get('/descricaoPedido', function () {
-    return view('sistema.descricaoPedido');
+    return view('sistema.pedido.descricaoPedido');
 });
 
 Route::get('/config', function () {
-    return view('sistema.config');
+    return view('sistema.suporte.config');
 });

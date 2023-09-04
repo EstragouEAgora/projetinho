@@ -1,4 +1,4 @@
-@extends('sistema.layoutDash')
+@extends('sistema.layout.layoutDash')
 @section('title', 'Perfil | Editar Informações Pessoais')
 @section('content')
 <div class="container">

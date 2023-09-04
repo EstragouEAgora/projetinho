@@ -19,7 +19,7 @@ class controladorServico extends Controller
     
     public function create()
     {
-        return view('sistema.novoServico');
+        return view('sistema.servico.novoServico');
     }
 
     
@@ -30,7 +30,7 @@ class controladorServico extends Controller
         $dados->nomeServico = $request->input('nomeServico');
         $dados->fotoServico = $path;
         $dados->save();
-        return redirect('sistema.dashboardAdm')->with('success', 'Novo servico cadastrado com sucesso!');
+        return redirect('sistema.dashboard.dashboardAdm')->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
     

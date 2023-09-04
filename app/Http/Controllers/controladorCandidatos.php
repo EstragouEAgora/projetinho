@@ -11,7 +11,6 @@ class controladorCandidatos extends Controller
     public function index()
     {
         $dados = Candidatos::all();
-        return view('', compact('dados');
     }
 
     public function create()

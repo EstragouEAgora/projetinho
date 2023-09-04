@@ -1,4 +1,4 @@
-@extends('sistema.layoutAuth')
+@extends('sistema.layout.layoutAuth')
 @section('title','Login | Estragou, e agora?')
 @section('content')
     <div class="row">

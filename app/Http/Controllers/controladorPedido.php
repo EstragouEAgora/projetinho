@@ -22,7 +22,7 @@ class controladorPedido extends Controller
      */
     public function create()
     {
-        return view('/pedido');
+        return view('/pedidos');
     }
 
     /**
