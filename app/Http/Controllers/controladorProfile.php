@@ -61,4 +61,29 @@ class controladorProfile extends Controller
     {
         //
     }
+    public function mudarSenha(Request $request, string $id)
+    {
+        if(isset($id)){
+           $senhaAtual = $request->input('senhaAtual');
+           $senhaBD = Auth::user()->password;
+           if(isset($senhaBD) && isset($senhaAtual)){
+               $senhaAtual = Hash::$senhaAtual;
+               if($senhaAtual === $senhaBD){
+                   $novaSenha1 = $request->input('novaSenha');
+                   $novaSenha2 = $request->input('confirmacaoSenha');
+                   if(isset($novaSenha1) && isset($novaSenha2)){
+                       if($novaSenha1 === $novaSenha2){
+                           $hash = Hash::$novaSenha1;
+                           if ($hash !== $senhaBD){
+                               $dados = Auth::find($id)
+                               $dados->password = $hash;
+                           }
+                   
+               }
+           }
+        }
+    }
+
+
+
 }
