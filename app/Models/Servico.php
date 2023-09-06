@@ -11,10 +11,10 @@ class Servico extends Model
     protected $fillable=['nomeServico','fotoServico'];
 
     public function user_servico(){
-        return $this->howMany(User_Servico::class);
+        return $this->hasMany(User_Servico::class);
     }
 
     public function pedido(){
-        return $this->howMany(Pedido::class);
+        return $this->hasMany(Pedido::class);
     }
 }

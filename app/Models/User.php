@@ -48,10 +48,10 @@ class User extends Authenticatable
     ];
 
     public function user_servico(){
-        return $this->howMany(User_Servico::class);
+        return $this->hasMany(User_Servico::class);
     }
 
     public function pedido(){
-        return $this->howMany(Pedido::class);
+        return $this->hasMany(Pedido::class);
     }
 }

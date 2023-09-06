@@ -8,18 +8,17 @@
         @csrf
             <div class="form-group"> 
                 <label for="descricaoPedido" class="h4 label-align" style="margin-left: 10px; margin-right: 30px;">Descrição do pedido:</label>
-                <p id="card-descricao-label-subtitulo" ></p>
                 <p id="card-descricao-label-subtitulo" >Descreva o que que você precisa detalhadamente, assim conseguimos os melhores pra você!</p>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="text" class="form-control" name="descricaoPedido" required autocomplete="descricaoPedido" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input type="text" class="form-control" name="descricaoPedido" required autocomplete="descricaoPedido" style="border-radius: 20px; background-color: #EFF2FB; padding-bottom: 100px">
                 </div>
             </div> 
 
             <div class="form-group">
-                <label for="valorPedido" class="h4 label-align" style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor:</label>
-                <p id="card-descricao-label-subtitulo">Valor sugerido</p>
+                <label for="valorPedido" class="h4 label-align" style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor (R$):</label>
+                <p id="card-descricao-label-subtitulo">Digite nesse formato: 99.90</p>
                 <div id="card-descricao-valor">
-                    <input id="valorPedido" type="text" class="form-control valor" name="valorPedido" required autocomplete="valorPedido" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input id="valorPedido" type="text" class="form-control valor" name="valorPedido" required autocomplete="valorPedido" style="border-radius: 40px; background-color: #EFF2FB" placeholder="99.90">
                 </div>
             </div> 
 
@@ -35,11 +34,13 @@
     </div>
 @endsection
 @section('javascript')
+<!--
     <script type="module">
         $().ready(function () {
             let valorPedido = new Inputmask ('R$ 9999.99')
             valorPedido.mask("#valorPedido");
         });
     </script>
+-->
 @endsection
 

@@ -58,6 +58,14 @@
                 </a>
             </li>
             <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                <a class="nav-link" href="{{route('listagemPedidos')}}" id="navbar-topicos-nome">
+                    <i class="bi bi-list-ul">
+                        <img src="{{ asset('storage/imagens/pedidos.svg') }}" />
+                    </i>
+                    Pedidos
+                </a>
+            </li>
+            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
                 <a class="nav-link" href="{{ route('avaliaCliente') }}" id="navbar-topicos-nome">
                     <i class="bi bi-house">
                         <img src="{{ asset('storage/imagens/star_avaliacao.svg') }}" />
