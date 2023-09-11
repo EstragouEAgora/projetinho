@@ -19,14 +19,14 @@ class controladorServico extends Controller
     /* Grava o novo serviço no banco de dados
         Na parte da foto, ele grava apenas o caminho (url) */
     public function store(Request $request)
-    {    
-        $path = $request->file('fotoServico')->store('imagens', 'public');
-        $dados = new Servico() ;
+    {   
+        $path = $request -> file('arquivo')->store('imagens', 'public');
+        $dados = new Servico();
         $dados-> nomeServico = $request-> input('nomeServico');
-        $dados-> fotoServico = $path;
+        $dados->fotoServico = $path;
         $dados -> save();
         $todos = Servico::all();
-        return redirect('sistema.dashboard.dashboardAdm', compact('todos'))->with('success', 'Novo servico cadastrado com sucesso!');
+        return view('/dashboard/Adm',compact('todos'))->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
  

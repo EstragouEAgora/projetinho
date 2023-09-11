@@ -5,7 +5,7 @@
         <p class="h1 text-start" id="titulo-da-pagina"><b>Cadastrar Serviço</b></p>
         <p id="subtitulo-da-pagina">Faça seu pedido de serviço preenchendo o formulário abaixo.</p>
         <div class="card" id="card-descricao-servico">
-            <form method="POST" action="/servico/add">
+            <form method="POST" action="{{route('gravaNovoServico')}}">
                 @csrf
                 <label for="nomeServico" id="card-descricao-valor">
                     <p class="h5">Nome do serviço:</p>
@@ -15,11 +15,11 @@
                         autocomplete="nomeServico" style="border-radius: 40px; background-color: #EFF2FB">
                 </div>
 
-                <label for="fotoServico" id="card-descricao-valor">
+                <label for="arquivo" id="card-descricao-valor">
                     <p class="h5">Adicionar imagem:</p>
                 </label>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input id="fotoServico" type="file" class="form-control" name="fotoServico" required
+                    <input type="file" class="form-control" name="arquivo" required
                         style="border-radius: 40px; background-color: #EFF2FB">
                 </div>
 
@@ -29,7 +29,7 @@
 
                     </button>
                     <button id="botaozin-padrao" type="submit">
-                        <a id="link-sem-sublinhado" style="color: white" href="gravaNovoServico">Cadastrar</a>
+                        <a id="link-sem-sublinhado" style="color: white" >Cadastrar</a>
                     </button>
                 </div>
             </form>
