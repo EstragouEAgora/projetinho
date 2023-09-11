@@ -28,8 +28,8 @@ class HomeController extends Controller
             return view('sistema.dashboard.dashboardPrestador', compact('dados'));
         }
         if(Auth::user() -> tipo =='3'){
-            $dados = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('dados'));
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'));
         }
         
     }

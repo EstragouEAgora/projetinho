@@ -21,14 +21,13 @@
         <div class="row">
             <div class="col-md-3 mb-3">
                 <div class="card" id="card-dash-cliente">
-                    @if (count($todos) == 0)
+                    @if ($todos == NULL)
                         <p style="text-align: center;">Não há Serviços cadastrados!</p>
                     @else
                         @foreach ($todos as $item)
                             <div class="col-md-4">
                                 <div class="card mb-4 box-shadow">
-                                    <img class="card-img-top" src="storage/{{ $item->fotoServico }}"
-                                        alt="{{ $item['nomeServico'] }}">
+                                    <img class="card-img-top" src="asset('storage/{{$item['fotoServico']}}')" alt="{{ $item['nomeServico'] }}">
                                     <div class="card-body">
                                         <h3>{{ $item['nomeServico'] }}</h3>
                                     </div>

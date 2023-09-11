@@ -77,6 +77,8 @@ Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPed
 
 // Controller do Serviço
 
+Route::get('/dashboard/servicos', [App\Http\Controllers\controladorServico::class, 'index'])->name('listaAdm');
+
 Route::get('/servicos/novo', [App\Http\Controllers\controladorServico::class, 'create'])->name('novoServico');
 
 Route::post('/servico/add', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');

@@ -11,6 +11,15 @@ class controladorServico extends Controller
 {
 
     /* Método que direciona para a página 
+        do dashboardAdm */
+        public function index()
+        {
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'));
+        }
+
+
+    /* Método que direciona para a página 
         em que será criado um novo serviço */
     public function create()
     {
@@ -26,8 +35,7 @@ class controladorServico extends Controller
         $dados-> nomeServico = $request-> input('nomeServico');
         $dados->fotoServico = $path;
         $dados -> save();
-        $todos = Servico::all();
-        return view('sistema.dashboard.dashboardAdm',compact('todos'))->with('success', 'Novo servico cadastrado com sucesso!');
+        return redirect('/dashboard/servicos')->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
  
@@ -44,8 +52,7 @@ class controladorServico extends Controller
             $dados['nomeServico'] = $item[0]->nomeServico;
             return view('sistema.servico.editServico', compact('dados'));
         } else {
-            $todos = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Não será possível editar o serviço!');
+            return redirect('/dashboard/servicos')->with('danger', 'Não será possível editar o serviço!');
         }
     }
 
@@ -64,11 +71,9 @@ class controladorServico extends Controller
                 $dados->fotoServico = $dados->fotoServico;
             }
             $dados->save();
-            $todos = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('success', 'Serviço alterado com sucesso');
+            return redirect('/dashboard/servicos')->with('success', 'Serviço alterado com sucesso');
         }else{
-            $todos = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Erro ao editar o serviço');
+            return redirect('/dashboard/servicos')->with('danger', 'Erro ao editar o serviço');
         }
     }
 
@@ -80,11 +85,9 @@ class controladorServico extends Controller
             $fotoServico = $dados->fotoServico;    
             Storage::disk('public')->delete($fotoServico);
             $dados->delete();
-            $todos = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('success', 'Serviço deletado com sucesso');
+            return redirect('/dashboard/servicos')->with('success', 'Serviço deletado com sucesso');
         }else{
-            $todos = Servico::all();
-            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Não deu pra apagar, não tem esse serviço cadastrado!!');
+            return redirect('/dashboard/servicos')->with('danger', 'Não deu pra apagar, não tem esse serviço cadastrado!!');
         }
     }
 }
