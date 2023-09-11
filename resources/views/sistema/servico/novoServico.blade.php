@@ -5,7 +5,7 @@
         <p class="h1 text-start" id="titulo-da-pagina"><b>Cadastrar Serviço</b></p>
         <p id="subtitulo-da-pagina">Faça seu pedido de serviço preenchendo o formulário abaixo.</p>
         <div class="card" id="card-descricao-servico">
-            <form method="POST" action="{{ route('gravaNovoServico') }}">
+            <form method="POST" action="/servico/add">
                 @csrf
                 <label for="nomeServico" id="card-descricao-valor">
                     <p class="h5">Nome do serviço:</p>
@@ -35,14 +35,4 @@
             </form>
         </div>
     </div>
-@endsection
-
-@section('javascript')
-    <!--
-    <script>
-        $(document).ready(function($)) {
-            $('#valor').mask('R$ 999,99');
-        }
-    </script>
-    -->
 @endsection

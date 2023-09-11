@@ -13,174 +13,30 @@
                     @if (count($dados) == 0)
                         <p style="text-align: center;">Não há Serviços cadastrados!</p>
                     @else
-                    @foreach ($dados as $item => $value)
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="/storage/{{ $value->fotoServico }}" alt="Card image cap" >
-                            <div class="card-body">
-                            <h3>{{ $value['nomeServico'] }}</h3>
-                            <div class="col text-end">
-                                <a href="/excluir-servico/" id="link-sem-sublinhado">
-                                    <i class="bi bi-pencil-fill">
-                                        <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                    </i>
-                                    <i class="bi bi-trash3-fill">
-                                        <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                    </i>
-                                </a>
+                        @foreach ($dados as $item => $value)
+                            <div class="col-md-4">
+                                <div class="card mb-4 box-shadow">
+                                    <img class="card-img-top" src="/storage/{{ $value->fotoServico }}"
+                                        alt="{{ $value->nomeServico }}">
+                                    <div class="card-body">
+                                        <h3>{{ $value['nomeServico'] }}</h3>
+                                    </div>
+                                    <div class="col text-end">
+                                        <a href="/excluir-servico/" id="link-sem-sublinhado">
+                                            <i class="bi bi-pencil-fill">
+                                                <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                            </i>
+                                            <i class="bi bi-trash3-fill">
+                                                <img src="{{ asset('storage/imagens/trash.svg') }}">
+                                            </i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
-                        <div class="row">
-                            <div class="col">
-                                <p id="txt-card-dash-cliente"><b>Encanador</b></p>
-                            </div>
-                            
-                            <img src="{{ asset('storage/imagens/encanador.png') }}" class="card-img-top"
-                                alt="EncanadorExemplo">
-                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
-
-
-
-
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Eletricista</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/2" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/eletricista.png') }}" class="card-img-top"
-                            alt="EletricistaExemplo">
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Jardineiro</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/3" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/jardineiro.png') }}" class="card-img-top"
-                            alt="JardineiroExemplo">
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Limpador de Piscina</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/3" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/limP.png') }}" class="card-img-top" alt="JardineiroExemplo">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Limpador de Caixa D'água</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/3" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/limCA.png') }}" class="card-img-top" alt="JardineiroExemplo">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Limpador de Caixa de Gordura</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/3" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/limCG.png') }}" class="card-img-top"
-                            alt="JardineiroExemplo">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Pintor</b></p>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/3" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
-                        </div>
-                        <img src="{{ asset('storage/imagens/Pintor.png') }}" class="card-img-top"
-                            alt="JardineiroExemplo">
-                    </div>
-                </div>
-            </div>
-
-
-
-
         </div>
     </div>
 @endsection
