@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Servico;
 use App\Models\User_Servico;
 
@@ -20,43 +21,54 @@ class controladorServico extends Controller
         Na parte da foto, ele grava apenas o caminho (url) */
     public function store(Request $request)
     {   
-        $path = $request -> file('arquivo')->store('imagens', 'public');
+        $path = $request->file('arquivo')->store('imagens', 'public');
         $dados = new Servico();
         $dados-> nomeServico = $request-> input('nomeServico');
         $dados->fotoServico = $path;
         $dados -> save();
         $todos = Servico::all();
-        return view('/dashboard/Adm',compact('todos'))->with('success', 'Novo servico cadastrado com sucesso!');
+        return view('sistema.dashboard.dashboardAdm',compact('todos'))->with('success', 'Novo servico cadastrado com sucesso!');
     }
 
  
     /* Envia para o formulário de edição do serviço */
     public function edit(string $id)
     {
-        $dados = Servico::find($id);
-        if(isset($dados)){
-            return view('sistema.servico.editServico', compact($dados));
+        $value = Servico::find($id);
+        if(isset($value)){
+            $item = Servico::select('id','nomeServico')
+                            ->from('servicos')
+                            ->where('id', '=', $id)->get();
+            $dados = array();
+            $dados['id'] = $item[0]->id;
+            $dados['nomeServico'] = $item[0]->nomeServico;
+            return view('sistema.servico.editServico', compact('dados'));
         } else {
-            return redirect('sistema.dashboard.dashboardAdm')->with('danger', 'Não será possível editar o serviço!');
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Não será possível editar o serviço!');
         }
     }
 
     /* Atualiza o serviço no Banco de Dados */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $dados = Servico::find($id);
         if(isset($dados)){
-            $dados -> nomeServico = $request -> input ('nomeServico');
+            $dados -> nomeServico = $request->input('nomeServico');
             $arquivo = $request->file('fotoServico');
             if(isset($arquivo)){
                 $nomeArquivo = 'imagens/'.date('YmdHi').$arquivo->getClientOriginalName();
                 $arquivo-> move(public_path('storage/imagens'), $nomeArquivo);
                 $dados->fotoServico = $nomeArquivo;
+            } else {
+                $dados->fotoServico = $dados->fotoServico;
             }
             $dados->save();
-            return redirect('sistema.dashboard.dashboardAdm')->with('success', 'Serviço alterado com sucesso');
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('success', 'Serviço alterado com sucesso');
         }else{
-            return redirect('sistema.dashboard.dashboardAdm')->with('danger', 'Erro ao editar o serviço');
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Erro ao editar o serviço');
         }
     }
 
@@ -68,9 +80,11 @@ class controladorServico extends Controller
             $fotoServico = $dados->fotoServico;    
             Storage::disk('public')->delete($fotoServico);
             $dados->delete();
-            return redirect('sistema.dashboard.dashboardAdm')->with('success', 'Serviço deletado com sucesso');
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('success', 'Serviço deletado com sucesso');
         }else{
-            return redirect('sistema.dashboard.dashboardAdm')->with('danger', 'Não deu pra apagar, não tem esse serviço cadastrado!!');
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('todos'))->with('danger', 'Não deu pra apagar, não tem esse serviço cadastrado!!');
         }
     }
 }

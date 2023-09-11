@@ -83,7 +83,9 @@ Route::post('/servico/add', [App\Http\Controllers\controladorServico::class, 'st
 
 Route::get('/servico/editar/{id}', [App\Http\Controllers\controladorServico::class, 'edit'])->name('editaServico');
 
-Route::post('/servico/update', [App\Http\Controllers\controladorServico::class, 'update'])->name('gravaServicoEditado');
+Route::post('/servico/update/{id}', [App\Http\Controllers\controladorServico::class, 'update'])->name('gravaServicoEditado');
+
+Route::get('/servico/delete/{id}', [App\Http\Controllers\controladorServico::class, 'destroy'])->name('deletaServico');
 
 //Controller do Profile
 

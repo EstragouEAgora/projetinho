@@ -5,20 +5,22 @@
         <p class="h1 text-start" id="titulo-da-pagina"><b>Cadastrar Serviço</b></p>
         <p id="subtitulo-da-pagina">Faça seu pedido de serviço preenchendo o formulário abaixo.</p>
         <div class="card" id="card-descricao-servico">
-            <form method="POST" action="">
+            <form method="POST" action="/servico/update/{{$dados['id']}}" enctype="multipart/form-data">
             @csrf
                 <label for="descricaoPedido" id="card-descricao-valor">
                     <p class="h5">Nome do serviço:</p>
                 </label>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="text" class="form-control" name="nomeServico" required autocomplete="nomeServico" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input type="text" class="form-control" name="nomeServico" required autocomplete="nomeServico" 
+                        style="border-radius: 40px; background-color: #EFF2FB" value="{{$dados['nomeServico']}}">
                 </div>
 
                 <label for="descricaoPedido" id="card-descricao-valor">
                     <p class="h5">Adicionar imagem:</p>
                 </label>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="file" class="form-control" name="fotoServico" required autocomplete="fotoServico" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input type="file" class="form-control" name="fotoServico" autocomplete="fotoServico" 
+                        style="border-radius: 40px; background-color: #EFF2FB">
                 </div>
                 
                 <div style="display: flex; justify-content: flex-end">
@@ -27,7 +29,7 @@
                         
                     </button>
                     <button id="botaozin-padrao">
-                        <a id="link-sem-sublinhado" style="color: white" href="{{route('gravaServicoEditado')}}">Cadastrar</a>
+                        <a id="link-sem-sublinhado" style="color: white">Cadastrar</a>
                     </button>
                 </div>
             </form>
