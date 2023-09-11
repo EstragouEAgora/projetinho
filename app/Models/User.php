@@ -12,45 +12,38 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // Permite a alteração dos dados abaixo
     protected $fillable = [
         'name',
         'email',
         'apelido',
         'telefone',
         'tipo',
+        'avaliacao',
         'fotoPerfil',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    // Declara que a senha e o token de autenticação são do tipo escondidos
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    /* Define o que fazer para garantir a segurança da autenticação 
+        - Verificação do email de tempos em tempos (token)
+        - Hash na senha para gravar no Banco de Dados*/
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
+    // Define relacionamento múltiplo com a tabela "user_servico"
     public function user_servico(){
         return $this->hasMany(User_Servico::class);
     }
 
+    // Define relacionamento múltiplo com a tabela "pedidos"
     public function pedido(){
         return $this->hasMany(Pedido::class);
     }

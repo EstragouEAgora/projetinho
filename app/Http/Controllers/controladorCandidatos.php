@@ -4,28 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candidatos;
+use App\Models\Pedido;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class controladorCandidatos extends Controller
 {
-    
-    public function index()
-    {
-        $dados = Candidatos::all();
-    }
 
-    public function create()
+    /* Método que adiciona o prestador de serviço 
+        na lista de candidatos de determinado pedido */
+    public function store(Request $request, $pedido_id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $dados = new Candidatos();
-        $dados->user_id = ;
-        $dados->pedido_id = ;
+        $dados = Candidatos::where('pedido_id', $pedido_id);
+        $dados->user_id = Auth::User()->id;
         $dados->novoValor = $request->input('novoValor');
         $dados->status = 0;
         $dados->save();
@@ -33,30 +25,23 @@ class controladorCandidatos extends Controller
         
     }
 
-    public function edit(string $id)
+    /* Método que direciona para a página de candidatos do cliente
+        Ele envia um array contendo os candidatos para determinado pedido */
+    public function show($pedido_id)
     {
-        
+        $candidatos = Candidato::where('pedido_id', $pedido_id);
+        return view('', compact('candidatos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        dados = Candidados::find($id);
-        if(isset($dados)){
-            $dados->status = 1;
-            $dados->save();
-        } else {
-            return redirect();
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    /* Apaga a lista de candidatos e redireciona para
+        o perfil do prestador de serviço escolhido */
     public function destroy(string $id)
     {
-        //
+        $lista = Candidatos::find($id);
+        if(isset($lista)){
+            $lista->delete();
+            return redirect('');
+        }
+        
     }
 }

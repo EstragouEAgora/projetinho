@@ -10,22 +10,35 @@
         <div class="row">
             <div class="col-md-3 mb-3">
                 <div class="card" id="card-dash-cliente">
-                    <div class="row">
-                        <div class="col">
-                            <p id="txt-card-dash-cliente"><b>Encanador</b></p>
+                    @if (count($dados) == 0)
+                        <p style="text-align: center;">Não há Serviços cadastrados!</p>
+                    @else
+                    @foreach ($dados as $item => $value)
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="/storage/{{ $value->fotoServico }}" alt="Card image cap" >
+                            <div class="card-body">
+                            <h3>{{ $value['nomeServico'] }}</h3>
+                            <div class="col text-end">
+                                <a href="/excluir-servico/" id="link-sem-sublinhado">
+                                    <i class="bi bi-pencil-fill">
+                                        <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                    </i>
+                                    <i class="bi bi-trash3-fill">
+                                        <img src="{{ asset('storage/imagens/trash.svg') }}">
+                                    </i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="col text-end">
-                            <a href="/excluir-servico/1" id="link-sem-sublinhado">
-                                <i class="bi bi-pencil-fill">
-                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
-                                </i>
-                                <i class="bi bi-trash3-fill">
-                                    <img src="{{ asset('storage/imagens/trash.svg') }}">
-                                </i>
-                            </a>
+                    @endforeach
+                        <div class="row">
+                            <div class="col">
+                                <p id="txt-card-dash-cliente"><b>Encanador</b></p>
+                            </div>
+                            
+                            <img src="{{ asset('storage/imagens/encanador.png') }}" class="card-img-top"
+                                alt="EncanadorExemplo">
                         </div>
-                        <img src="{{ asset('storage/imagens/encanador.png') }}" class="card-img-top" alt="EncanadorExemplo">
-                    </div>
                 </div>
             </div>
 

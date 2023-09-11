@@ -11,23 +11,23 @@
                     <p class="h5">Nome do serviço:</p>
                 </label>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="text" class="form-control" name="descricaoPedido" required autocomplete="descricaoPedido" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input type="text" class="form-control" name="nomeServico" required autocomplete="nomeServico" style="border-radius: 40px; background-color: #EFF2FB">
                 </div>
 
                 <label for="descricaoPedido" id="card-descricao-valor">
                     <p class="h5">Adicionar imagem:</p>
                 </label>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="file" class="form-control" name="descricaoPedido" required autocomplete="descricaoPedido" style="border-radius: 40px; background-color: #EFF2FB">
+                    <input type="file" class="form-control" name="fotoServico" required autocomplete="fotoServico" style="border-radius: 40px; background-color: #EFF2FB">
                 </div>
                 
                 <div style="display: flex; justify-content: flex-end">
                     <button id="botaozin-padrao">
-                        <a id="link-sem-sublinhado" style="color: white"href="/home">Cancelar</a>
+                        <a id="link-sem-sublinhado" style="color: white"href="/dashboard/Adm">Cancelar</a>
                         
                     </button>
                     <button id="botaozin-padrao">
-                        <a id="link-sem-sublinhado" style="color: white">Cadastrar</a>
+                        <a id="link-sem-sublinhado" style="color: white" href="{{route('gravaServicoEditado')}}">Cadastrar</a>
                     </button>
                 </div>
             </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Candidatos;
 use App\Models\Servico;
 use App\Models\User_Servico;
 use App\Models\User;
@@ -12,18 +13,15 @@ use Illuminate\Support\Facades\Auth;
 
 class controladorPedido extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $pedidos = Pedido::all();
         return view('');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /* Envia para a página de cadastro de pedido
+        Junto com o dado do "servico_id" */
     public function create($servico_id)
     {
         $dados = Servico::find($servico_id);
@@ -31,13 +29,12 @@ class controladorPedido extends Controller
         if (isset($dados)){
             return view('sistema.pedido.pedido',compact('dados'));       
         } else {
-            return view('sistema.dashboard.dashboardClient');
+            return redirect('sistema.dashboard.dashboardClient')->with('danger', 'Erro ao redirecionar a página!');
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* Cadastra o novo pedido e retorna com uma mensagem para o usuário
+        informando o status da operação  */
     public function store(Request $request)
     {
         $dados = new Pedido();
@@ -50,6 +47,8 @@ class controladorPedido extends Controller
         $dados->valorPedido = $valor;
         if(isset($dados)){
             $dados->save();
+            $listaCand = new Candidatos();
+            $listaCand->pedido_id = $dados->id;
             return redirect('/dashboardCliente')->with('success','Seu pedido foi cadastrado com sucesso!');
         } else {
             return redirect('/dashboardCliente')->with('danger', 'Não foi possível cadastrar seu pedido!');
@@ -57,14 +56,14 @@ class controladorPedido extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    /* A depender do tipo de usuário:
+            1 - Cliente
+            2 - Prestador de serviço
+        Será enviado um conjunto de dados com as informações dos pedidos:
+        1 - Que o usuário fez
+        2 - Que o usuário recebeu
 
+    */
     public function listaPedidos()
     {
         if (Auth::User()->tipo == '1') {
@@ -77,12 +76,14 @@ class controladorPedido extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /* Envia para uma página de edição do pedido */
     public function edit(string $id)
     {
-        //
+        $pedido = Pedido::find($id);
+        if(isset($pedido)){
+            return view('', compact('pedido'));
+        }
+        return redirect('sistema.pedido.listaPedidosCliente')->with('danger', 'Erro ao redirecionar à página de edição!');
     }
 
     /**
@@ -90,14 +91,27 @@ class controladorPedido extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pedido = Pedido::find($id);
+        if(isset($pedido)){
+            $pedido-> descricaoPedido =$request->input('descricaoPedido');
+            $pedido-> valorPedido =$request->input('valorPedido');
+            $data->save();
+        }else{
+            return redirect('sistema.pedido.listaPedidosCliente')->with('danger', 'Erro ao editar seu pedido');
+        }
+        return redirect('sistema.pedido.listaPedidosCliente')->with('success', 'Pedido editado com sucesso');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $dados = Pedido::find($id);
+        $candidatos = Candidato::where('pedido_id', $id);
+        if(isset($dados) && isset($candidatos)){
+            $candidatos->delete();
+            $dados->delete();
+        }else{
+            return redirect('sistema.pedido.listaPedidosCliente')->with('danger', 'Erro ao deletar seu pedido!');
+        }
+        return redirect('sistema.pedido.listaPedidosCliente')->with('success', 'Pedido deletado com sucesso!');
     }
 }

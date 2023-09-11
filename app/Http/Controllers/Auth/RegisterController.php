@@ -11,42 +11,19 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    /* Método construtor que determina que todo usuário 
+       ainda não autenticado se encontra como visitante */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    /* Onde são definidas as regras de validação para 
+        preencher a tabela users */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -61,12 +38,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
+    /* Preenche a tabela ('users') no banco de dados com os dados 
+        validados e devidamente formatados*/
     protected function create(array $data) {
         $userData = [
             'name' => ucfirst($data['name']),
@@ -74,6 +47,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'telefone' => $data['telefone'],
             'tipo' => $data['tipo'],
+            /*Todo usuário cadastrado recebe
+              esse valor que será tratado posteriormente
+              para ter o significado de "Ainda não avaliado" */
+            'avaliacao' => 6,
             'fotoPerfil' => '',
             'password' => Hash::make($data['password']),
         ];

@@ -9,37 +9,29 @@ use App\Models\Servico;
 
 class HomeController extends Controller
 {
-    // Executa o método de autenticação para que o sistema possa ser acessado...
+    /* Executa o método de autenticação para acessar o sistema completo*/
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    // Identifica o tipo de usuário e direciona para seu devido dashboard.
+    /* Identifica o tipo de usuário que fez login 
+        E direciona para seu devido dashboard */
     public function index()
     {
         if(Auth::user() -> tipo =='1'){
-            return view('sistema.dashboard.dashboardClient');
+            $dados = Servico::all();
+            return view('sistema.dashboard.dashboardClient', compact('dados'));
         }   
         if(Auth::user() -> tipo =='2'){
-            return view('sistema.dashboard.dashboardPrestador');
+            $dados = Pedido::where('user_id', Auth::User()->id);
+            return view('sistema.dashboard.dashboardPrestador', compact('dados'));
         }
         if(Auth::user() -> tipo =='3'){
-            return view('sistema.dashboard.dashboardAdm');
+            $dados = Servico::all();
+            return view('sistema.dashboard.dashboardAdm', compact('dados'));
         }
         
     }
-
-    public function avaliacao()
-    {
-        $tudo = Auth::all();
-        foreach ($tudo as $item){
-            if ($item-> tipo == '2'){
-                $dados = $item;
-            }
-        }
-        return view('sistema.avaliacao.avaliacaoCliente', compact('dados'));
-    }
-
 
 }

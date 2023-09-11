@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        /* Define quais as colunas da tabela users no Banco de dados 
+            Define também os tipos de cada coluna*/
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -18,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('telefone');
             $table->integer('tipo');
+            $table->integer('avaliacao');
             $table->string('fotoPerfil');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -26,9 +29,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    // Permite apagar a tabela users
     public function down(): void
     {
         Schema::dropIfExists('users');

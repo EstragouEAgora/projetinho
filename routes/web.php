@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-// ROTAS QUE NÃO PASSAM PELO CONTROLLER
+/* ROTAS QUE NÃO PASSAM PELO CONTROLLER
+ - Rota raiz */
 
-// Rota raiz
 Route::get('/', function () {
     return view('sistema.index');
 });
 
-// Rotas sem autenticação
+// Rotas SEM autenticação
 
 Route::get('/sobre', function () {
     return view('sistema.suporte.sobre');
@@ -23,48 +23,37 @@ Route::get('/suporte', function () {
     return view('sistema.suporte.suporte');
 });
 
-// Rotas com autenticação
+// Rota PARA autenticar
 
 Auth::routes();
 
-Route::get('/funcionalidadesDash', function () {
-    return view('sistema.suporte.funcionalidadesDash');
-});
+/* Rotas COM autenticação
+    - DASHBOARDS */
 
-
-Route::get('/suporteDash', function () {
-    return view('sistema.suporte.suporteDash');
-});
-
-Route::get('/perfil', function () {
-    return view('auth.profile');
-});
-
-
-
-// Rotas com autenticação - DASHBOARDS
-
-Route::get('/dashboardCliente', function () {
+Route::get('/dashboard', function () {
     return view('sistema.dashboard.dashboardClient');
 });
    
-Route::get('/dashboardPrestador', function () {
+Route::get('/dashboard/Prestador', function () {
     return view('sistema.dashboard.dashboardPrestador');
 });
 
-Route::get('/dashboardAdm', function () {
+Route::get('/dashboard/Adm', function () {
     return view('sistema.dashboard.dashboardAdm');
 });
 
 
-// Rotas com autenticação - PEDIDO
-
-Route::get('/pedidos', function () {
-    return view('sistema.pedido.pedido');
+Route::get('/dashboard/funcionalidades', function () {
+    return view('sistema.suporte.funcionalidadesDash');
 });
 
-Route::get('/descricaoPedido', function () {
-    return view('sistema.pedido.descricaoPedido');
+// Rotas COM autenticação - SUPORTE
+Route::get('/dashboard/suporteDash', function () {
+    return view('sistema.suporte.suporteDash');
+});
+
+Route::get('/dashboard/perfil', function () {
+    return view('auth.profile');
 });
 
 
@@ -75,25 +64,34 @@ Route::get('/descricaoPedido', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/avaliacao', [App\Http\Controllers\HomeController::class, 'avaliacao'])->name('avaliaCliente');
 
 // Controller do Pedido
 
-Route::get('/pedido/lista', [App\Http\Controllers\controladorPedido::class, 'listaPedidos'])->name('listagemPedidos');
+Route::get('/dashboard/pedidos/lista', [App\Http\Controllers\controladorPedido::class, 'listaPedidos'])->name('listagemPedidos');
 
-Route::get('/pedido/{servico_id}', [App\Http\Controllers\controladorPedido::class, 'create'])->name('pedido');
+Route::get('/pedidos/{servico_id}', [App\Http\Controllers\controladorPedido::class, 'create'])->name('pedido');
 
-Route::post('/pedido/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
+Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
 
-Route::get('/pedido/descricao', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
+Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
 
 // Controller do Serviço
 
 Route::get('/servicos/novo', [App\Http\Controllers\controladorServico::class, 'create'])->name('novoServico');
 
-Route::post('/servico', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');
+Route::post('/servico/add', [App\Http\Controllers\controladorServico::class, 'store'])->name('gravaNovoServico');
 
+Route::get('/servico/editar/{id}', [App\Http\Controllers\controladorServico::class, 'edit'])->name('editaServico');
 
+Route::post('/servico/update', [App\Http\Controllers\controladorServico::class, 'update'])->name('gravaServicoEditado');
+
+//Controller do Profile
+
+Route::get('/perfil', [App\Http\Controllers\controladorProfile::class, 'index'])->name('perfil');
+
+Route::post('/perfil/atualizar', [App\Http\Controllers\controladorProfile::class, 'update'])->name('atualizaPerfil');
+
+Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::class, 'avaliacao'])->name('avaliaCliente');
 
 
 

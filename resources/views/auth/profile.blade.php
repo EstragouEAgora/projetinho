@@ -10,10 +10,13 @@
         </div>
     </div>
     <div class="card" id="editar-perfil">
-        <form method="POST" action="{{ route('gravaNovoPedido') }}">
+        <form method="POST" action="{{ route('') }}">
             @csrf
             @method('PUT')
 
+            <!-- <img src="{{$dados['fotoPerfil']}}" class="card-img-top" alt="{{$dados['fotoPerfil']}}"> -->
+            <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil" required
+                        style="border-radius: 40px; background-color: #EFF2FB">
 
             <label for="apelido">
                 <p class="h4">Apelido:</p>

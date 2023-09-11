@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    /* Define quais as colunas da tabela pedidos no Banco de dados 
+        Define também os tipos de cada coluna*/
     public function up(): void
     {
         Schema::create('pedidos', function (Blueprint $table) {
@@ -23,9 +22,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    // Permite apagar a tabela pedidos
     public function down(): void
     {
         Schema::dropIfExists('pedidos');

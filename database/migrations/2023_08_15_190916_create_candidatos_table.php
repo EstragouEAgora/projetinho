@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+     /* Define quais as colunas da tabela candidatos no Banco de dados 
+            Define também os tipos de cada coluna
+            Como essa tabela possui id de outras tabelas, suas colunas são do tipo:
+            Foreign -> chave estrangeira*/
     public function up(): void
     {
         Schema::create('candidatos', function (Blueprint $table) {
@@ -23,9 +24,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    // Permite apagar a tabela candidatos
     public function down(): void
     {
         Schema::dropIfExists('candidatos');
