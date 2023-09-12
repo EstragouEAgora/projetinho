@@ -12,7 +12,7 @@
                         <p class="h5" id="card-descricao-destaque">{{ $item->servico['nomeServico'] }}</p>
                         <p id="card-descricao-texto-simples">{{ $item['descricaoPedido'] }}</p>
                     </div>
-                    <a href="/pedidos/detalhes/{{$dados['pedido_id']}}">
+                    <a href="/pedidos/detalhes/{{$item['pedido_id']}}">
                         <button class="btn btn-secondary" id="botaozin-padrao"> 
                             <i class="bi bi-hand-index">
                                 <img src="{{asset('storage/imagens/click.svg')}}" />

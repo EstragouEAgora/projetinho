@@ -57,46 +57,50 @@
                     Home
                 </a>
             </li>
-            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="{{route('listagemPedidos')}}" id="navbar-topicos-nome">
-                    <i class="bi bi-list-ul">
-                        <img src="{{ asset('storage/imagens/pedidos.svg') }}" />
-                    </i>
-                    Pedidos
-                </a>
-            </li>
-            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="{{ route('avaliaCliente') }}" id="navbar-topicos-nome">
-                    <i class="bi bi-house">
-                        <img src="{{ asset('storage/imagens/star_avaliacao.svg') }}" />
-                    </i>
-                    Avaliação
-                </a>
-            </li>
-            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="/suporteDash" id="navbar-topicos-nome">
-                    <i class="bi bi-headset">
-                        <img src="{{ asset('storage/imagens/headset.svg') }}" />
-                    </i>
-                    Suporte
-                </a>
-            </li>
-            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="/funcionalidadesDash" id="navbar-topicos-nome">
-                    <i class="bi bi-link-45deg">
-                        <img src="{{ asset('storage/imagens/link.svg') }}" />
-                    </i>
-                    Funcionalidades
-                </a>
-            </li>
-            <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="/ajuda" id="navbar-topicos-nome">
-                    <i class="bi bi-question-circle-fill">
-                        <img src="{{ asset('storage/imagens/question-circle-fill.svg') }}" />
-                    </i>
-                    Ajuda
-                </a>
-            </li>
+            @if (Auth::user()->tipo != 3)
+                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                    <a class="nav-link" href="{{ route('listagemPedidos') }}" id="navbar-topicos-nome">
+                        <i class="bi bi-list-ul">
+                            <img src="{{ asset('storage/imagens/pedidos.svg') }}" />
+                        </i>
+                        Pedidos
+                    </a>
+                </li>
+            @endif
+            @if (Auth::user()->tipo != 3)
+                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                    <a class="nav-link" href="{{ route('avaliaCliente') }}" id="navbar-topicos-nome">
+                        <i class="bi bi-house">
+                            <img src="{{ asset('storage/imagens/star_avaliacao.svg') }}" />
+                        </i>
+                        Avaliação
+                    </a>
+                </li>
+                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                    <a class="nav-link" href="/suporteDash" id="navbar-topicos-nome">
+                        <i class="bi bi-headset">
+                            <img src="{{ asset('storage/imagens/headset.svg') }}" />
+                        </i>
+                        Suporte
+                    </a>
+                </li>
+                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                    <a class="nav-link" href="/funcionalidadesDash" id="navbar-topicos-nome">
+                        <i class="bi bi-link-45deg">
+                            <img src="{{ asset('storage/imagens/link.svg') }}" />
+                        </i>
+                        Funcionalidades
+                    </a>
+                </li>
+                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
+                    <a class="nav-link" href="/ajuda" id="navbar-topicos-nome">
+                        <i class="bi bi-question-circle-fill">
+                            <img src="{{ asset('storage/imagens/question-circle-fill.svg') }}" />
+                        </i>
+                        Ajuda
+                    </a>
+                </li>
+            @endif
             <li class="nav-item active flex-sm-fill" id="navbar-topicos">
                 <a class="nav-link" href="/perfil" id="navbar-topicos-nome">
                     <i class="bi bi-gear">

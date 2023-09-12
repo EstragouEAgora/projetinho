@@ -27,7 +27,7 @@
                         @foreach ($todos as $item)
                             <div class="col-md-4">
                                 <div class="card mb-4 box-shadow">
-                                    <img class="card-img-top" src="asset('storage/{{$item['fotoServico']}}')" alt="{{ $item['nomeServico'] }}">
+                                    <img class="card-img-top" src="/storage/{{$item->fotoServico}}" alt="{{ $item['nomeServico'] }}">
                                     <div class="card-body">
                                         <h3>{{ $item['nomeServico'] }}</h3>
                                     </div>
@@ -37,7 +37,7 @@
                                                 <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
                                             </i>
                                         </a>
-                                        <a href="/servico/delete/{{ $item->id }}" id="link-sem-sublinhado">
+                                        <a href="/servico/delete/{{ $item->id }}" id="link-sem-sublinhado" onclick="return confirm('Tem certeza que deseja apagar esse serviço?');">
                                             <i class="bi bi-trash3-fill">
                                                 <img src="{{ asset('storage/imagens/trash.svg') }}">
                                             </i>

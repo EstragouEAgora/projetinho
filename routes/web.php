@@ -93,7 +93,7 @@ Route::get('/servico/delete/{id}', [App\Http\Controllers\controladorServico::cla
 
 Route::get('/perfil', [App\Http\Controllers\controladorProfile::class, 'index'])->name('perfil');
 
-Route::post('/perfil/atualizar', [App\Http\Controllers\controladorProfile::class, 'update'])->name('atualizaPerfil');
+Route::post('/perfil/atualizar/{id}', [App\Http\Controllers\controladorProfile::class, 'update'])->name('atualizaPerfil');
 
 Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::class, 'avaliacao'])->name('avaliaCliente');
 

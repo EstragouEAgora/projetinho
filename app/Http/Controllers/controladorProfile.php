@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User_Servico;
+use App\Models\Servico;
 use Illuminate\Support\Facades\Auth;
 
 class controladorProfile extends Controller
@@ -13,14 +15,28 @@ class controladorProfile extends Controller
     public function index()
     {
         $dados = Auth::User();
-        return view('auth.profile', compact('dados'));
+        if (Auth::User()->tipo == 2){
+            $user_servico = User_Servico::where('user_id', '=',  Auth::User()->id);
+            $servicosCadastrados = array();
+            foreach ($user_servico as $item) {
+                $servico = Servico::find($item->servico_id);
+                $item->nomeServico = $servico->nomeServico;
+                $servicosCadastrados = $item->servico_id;
+            }
+            $servicos = Servico::all();
+            return view('auth.profile', compact('dados','user_servico','servicos', 'servicosCadastrados'));
+        } else {
+            $dados = Auth::User();
+            return view('auth.profile', compact('dados'));
+        }
+        
     }
 
     /* Atualiza os dados do usuário com base nas alterações do formulário
         E redireciona para a mesma página, porém com os dados atualizados */
     public function update(Request $request, string $id)
     {
-        $dados = Auth::find($id);
+        $dados = Auth::User();
         $dadosErro = Auth::User();
         if(isset($dados)){
             $path = $request -> file('fotoPerfil')->store('imagens', 'public');

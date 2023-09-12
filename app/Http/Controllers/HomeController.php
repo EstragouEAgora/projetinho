@@ -20,8 +20,8 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user() -> tipo =='1'){
-            $dados = Servico::all();
-            return view('sistema.dashboard.dashboardClient', compact('dados'));
+            $todos = Servico::all();
+            return view('sistema.dashboard.dashboardClient', compact('todos'));
         }   
         if(Auth::user() -> tipo =='2'){
             $dados = Pedido::where('user_id', Auth::User()->id);

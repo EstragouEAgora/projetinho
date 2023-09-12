@@ -13,13 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class controladorPedido extends Controller
 {
-    
-    public function index()
-    {
-        $pedidos = Pedido::all();
-        return view('');
-    }
-
     /* Envia para a página de cadastro de pedido
         Junto com o dado do "servico_id" */
     public function create($servico_id)
@@ -49,9 +42,9 @@ class controladorPedido extends Controller
             $dados->save();
             $listaCand = new Candidatos();
             $listaCand->pedido_id = $dados->id;
-            return redirect('/dashboardCliente')->with('success','Seu pedido foi cadastrado com sucesso!');
+            return redirect('/home')->with('success','Seu pedido foi cadastrado com sucesso!');
         } else {
-            return redirect('/dashboardCliente')->with('danger', 'Não foi possível cadastrar seu pedido!');
+            return redirect('/home')->with('danger', 'Não foi possível cadastrar seu pedido!');
         }
         
     }

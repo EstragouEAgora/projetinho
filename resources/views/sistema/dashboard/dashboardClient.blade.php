@@ -16,22 +16,25 @@
         <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços Disponíveis</b></p>
         <p id="subtitulo-da-pagina">Explore nossos serviços disponíveis e selecione aquele que melhor atende às suas
             necessidades. Estamos aqui para oferecer soluções especialmente para você!</p>
-
-        @foreach ($dados as $item)
-            <div class="row" style="margin-top: 50px">
-                <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm">
-                        <img src="{{$dados['fotoServico']}}" class="card-img-top" alt="{{$dados['nomeServico']}}">
-                        <div class="card-body">
-                            <p id="txt-card-dash-cliente"><b>{{$dados['nomeServico']}}</b></p>
-                            <div class="btn-group">
-                                <a href="/pedido/{{$dados['servico_id']}}" id="link-sem-sublinhado">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                                        id="botao-solicitar">Solicitar pedido </button>
-                                </a>
+        @if ($todos == null)
+            <p style="text-align: center;">Não há Serviços cadastrados!</p>
+        @else
+            @foreach ($todos as $item)
+                <div class="row" style="margin-top: 50px">
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <img src="/storage/{{$item->fotoServico}}" class="card-img-top" alt="{{ $item['nomeServico'] }}">
+                            <div class="card-body">
+                                <p id="txt-card-dash-cliente"><b>{{ $item['nomeServico'] }}</b></p>
+                                <div class="btn-group">
+                                    <a href="/pedidos/{{$item->id}}" id="link-sem-sublinhado">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            id="botao-solicitar">Solicitar pedido </button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-        @endforeach
-@endsection
+            @endforeach
+        @endif
+    @endsection
