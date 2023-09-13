@@ -18,6 +18,8 @@
 </head>
 <body>
     <div id="app">
+        @component('sistema.navbar.navbarInicial')
+        @endcomponent
         @yield('content')
 </body>
 </html>

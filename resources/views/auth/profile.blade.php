@@ -56,7 +56,20 @@
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
-
+                    @foreach ($user_servico as $item)
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckChecked"
+                            value="{{ $item->id }}">
+                        <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
+                    @endforeach
+                    @foreach ($servicos as $item)
+                        @foreach ($servicosCadastrados as $value)
+                            @if ($item->id != $svalue)
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckDefault"
+                                    value="{{ $item->id }}">
+                                <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
+                            @endif
+                        @endforeach
+                    @endforeach
                 @endif
                 <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
                     <button type="button" id="botaozin-padrao" href="/home">Cancelar</button>
