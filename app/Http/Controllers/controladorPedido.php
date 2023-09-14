@@ -63,10 +63,17 @@ class controladorPedido extends Controller
             $pedidos = Pedido::where('user_id', Auth::User()->id)->with('servico')->get();
             return view('sistema.pedido.listaPedidosCliente', compact('pedidos'));
         } elseif (Auth::User()->tipo == '2') {
-            $pedidos = Pedido::where('user_id', Auth::User()->id)->with('servico')->get()->whereHas('servico_id', Auth::User()->user_servico->id);
-            return view('sistema.pedido.listaPedidosPres', compact('pedidos'));
-    }
-
+            $servicos = User_Servico::where('user_id', Auth::User()->id)->get();
+            $pedidos = array();
+            foreach ($servicos as $item) {
+                $pedidos = Pedido::where('servico_id', $item->servico_id)->get();
+                $item->nomeServico = Servico::select('nomeServico')->from('servicos')->where('servico_id','=',$item->servico_id);
+            }
+            echo "<pre>";
+            print_r($servicos);
+            echo "</pre>";
+            //return view('sistema.pedido.listaPedidosPres', compact('pedidos', 'servicos'));
+        }
     }
 
     /* Envia para uma página de edição do pedido */

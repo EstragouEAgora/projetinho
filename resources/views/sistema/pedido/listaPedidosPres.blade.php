@@ -3,14 +3,15 @@
 @section('content')
     <div class="container">
         <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços para você</b></p>
-        <p id="subtitulo-da-pagina">Os serviços que selecionamos para você!</p>
+        <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
     </div>
     @foreach ($pedidos as $item)
         <div class="row">
             <div class="d-flex mb-4">
                 <div class="card text-center mx-4">
                     <p class="h5" id="card-descricao-destaque">{{ $item->servico['nomeServico'] }}</p>
-                    <a href="{{ route('verPedido') }}">
+                    <p class="h5" id="card-descricao-destaque">{{ $item['descricaoPedido'] }}</p>
+                    <a href="">
                         <button class="btn btn-secondary" id="botaozin-padrao">
                             <i class="bi bi-hand-index">
                                 <img src="{{ asset('storage/imagens/click.svg') }}" />

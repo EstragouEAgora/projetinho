@@ -48,15 +48,13 @@ Route::get('/dashboard/funcionalidades', function () {
 });
 
 // Rotas COM autenticação - SUPORTE
-Route::get('/dashboard/suporteDash', function () {
+Route::get('/dashboard/suporte', function () {
     return view('sistema.suporte.suporteDash');
 });
 
 Route::get('/dashboard/perfil', function () {
     return view('auth.profile');
 });
-
-
 
 // ROTAS QUE PASSAM PELO CONTROLLER
 
@@ -67,13 +65,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Controller do Pedido
 
-Route::get('/dashboard/pedidos/lista', [App\Http\Controllers\controladorPedido::class, 'listaPedidos'])->name('listagemPedidos');
+Route::get('/dashboard/pedidos', [App\Http\Controllers\controladorPedido::class, 'listaPedidos'])->name('listagemPedidos');
 
 Route::get('/pedidos/{servico_id}', [App\Http\Controllers\controladorPedido::class, 'create'])->name('pedido');
 
 Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
 
 Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
+
+// Controller do Pedido
+
+Route::get('/dashboard/candidatos/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'show'])->name('verCandidatos');
 
 // Controller do Serviço
 

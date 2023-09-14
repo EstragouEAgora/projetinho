@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User_Servico;
 use App\Models\Servico;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class controladorProfile extends Controller
@@ -97,10 +98,10 @@ class controladorProfile extends Controller
         Depende do tipo de usuário logado (cliente ou prestador de serviço) */    
     public function avaliacao()
     {
-        $tudo = Auth::all();
-        foreach ($tudo as $item){
-            if ($item-> tipo == '2'){
-                $dados = $item;
+        $dados = User::select('id', 'name', 'apelido','avaliacao')->from('users')->where('tipo', '=', 2)->get();
+        foreach ($dados as $item) {
+            if ($item->avaliacao < 5){
+                $item->resto = 5 - $item->avaliacao;
             }
         }
         return view('sistema.avaliacao.avaliacaoCliente', compact('dados'));

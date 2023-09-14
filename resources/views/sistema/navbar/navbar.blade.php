@@ -77,7 +77,7 @@
                     </a>
                 </li>
                 <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                    <a class="nav-link" href="/suporteDash" id="navbar-topicos-nome">
+                    <a class="nav-link" href="/dashboard/suporte" id="navbar-topicos-nome">
                         <i class="bi bi-headset">
                             <img src="{{ asset('storage/imagens/headset.svg') }}" />
                         </i>
@@ -85,19 +85,11 @@
                     </a>
                 </li>
                 <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                    <a class="nav-link" href="/funcionalidadesDash" id="navbar-topicos-nome">
+                    <a class="nav-link" href="/dashboard/funcionalidades" id="navbar-topicos-nome">
                         <i class="bi bi-link-45deg">
                             <img src="{{ asset('storage/imagens/link.svg') }}" />
                         </i>
                         Funcionalidades
-                    </a>
-                </li>
-                <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                    <a class="nav-link" href="/ajuda" id="navbar-topicos-nome">
-                        <i class="bi bi-question-circle-fill">
-                            <img src="{{ asset('storage/imagens/question-circle-fill.svg') }}" />
-                        </i>
-                        Ajuda
                     </a>
                 </li>
             @endif

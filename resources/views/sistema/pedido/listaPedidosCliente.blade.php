@@ -1,25 +1,24 @@
 @extends('sistema.layout.layoutDash')
 @section('title', 'Home | Estragou, e agora?')
 @section('content')
-    <div class="container">
-        <p class="h1 text-start" id="titulo-da-pagina"><b>Lista de Pedidos</b></p>
+    <div class="container" style="margin-top: 60px">
+        <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Lista de Pedidos</b></p>
         <p id="subtitulo-da-pagina">Essa é a lista de pedidos que você enviou</p>
-
         @foreach ($pedidos as $item)
             <div class="row">
-                <div class="d-flex mb-4">
-                    <div class="card text-center mx-4">
-                        <p class="h5" id="card-descricao-destaque">{{ $item->servico['nomeServico'] }}</p>
-                        <p id="card-descricao-texto-simples">{{ $item['descricaoPedido'] }}</p>
+                <div class="col-md-12 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="h5 card-title">
+                                <span style="color: #3c5bbf; font-weight: bold;">{{ $item->servico['nomeServico'] }}</span>
+                            </p>
+                            <p class="card-text"><b>Descrição:</b> {{ $item['descricaoPedido'] }}</p>
+                            <p class="card-text"><b>Valor:</b> R$ {{ $item['valorPedido'] }}</p>
+                            <a href="/dashboard/candidatos/{{ $item->id }}">
+                                <button class="btn btn-secondary" id="botaozin-padrao"> Candidatos </button>
+                            </a>
+                        </div>
                     </div>
-                    <a href="/pedidos/detalhes/{{$item['pedido_id']}}">
-                        <button class="btn btn-secondary" id="botaozin-padrao"> 
-                            <i class="bi bi-hand-index">
-                                <img src="{{asset('storage/imagens/click.svg')}}" />
-                            </i>   
-                            Clique para ver mais...
-                        </button>
-                    </a>
                 </div>
             </div>
         @endforeach

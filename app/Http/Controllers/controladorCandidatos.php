@@ -29,8 +29,8 @@ class controladorCandidatos extends Controller
         Ele envia um array contendo os candidatos para determinado pedido */
     public function show($pedido_id)
     {
-        $candidatos = Candidato::where('pedido_id', $pedido_id);
-        return view('', compact('candidatos'));
+        $candidatos = Candidatos::where('pedido_id', $pedido_id);
+        return view('sistema.pedido.candidatosLista', compact('candidatos'));
     }
 
     /* Apaga a lista de candidatos e redireciona para

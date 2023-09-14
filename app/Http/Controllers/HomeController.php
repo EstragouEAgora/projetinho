@@ -24,8 +24,8 @@ class HomeController extends Controller
             return view('sistema.dashboard.dashboardClient', compact('todos'));
         }   
         if(Auth::user() -> tipo =='2'){
-            $dados = Pedido::where('user_id', Auth::User()->id);
-            return view('sistema.dashboard.dashboardPrestador', compact('dados'));
+            $pedidos = Pedido::where('user_id', Auth::User()->id);
+            return view('sistema.dashboard.dashboardPrestador', compact('pedidos'));
         }
         if(Auth::user() -> tipo =='3'){
             $todos = Servico::all();
