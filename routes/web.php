@@ -73,6 +73,11 @@ Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, '
 
 Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
 
+// Controller do Candidato
+
+Route::post('/dashboard/pedidos/candidatar/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'store'])->name('candidatar');
+
+
 // Controller do Pedido
 
 Route::get('/dashboard/candidatos/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'show'])->name('verCandidatos');
