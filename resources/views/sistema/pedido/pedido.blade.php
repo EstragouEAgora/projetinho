@@ -12,6 +12,8 @@
                 <p id="card-descricao-label-subtitulo">Descreva o que que você precisa detalhadamente, assim conseguimos os
                     melhores pra você!</p>
                 <div style="margin-left: 10px; margin-right: 30px;">
+                    <textarea class="form-control" name="descricaoPedido" required
+                        style="border-radius: 20px; background-color: #EFF2FB; padding-bottom: 100px"></textarea>
                     <input type="text" class="form-control" name="descricaoPedido" required
                         autocomplete="descricaoPedido"
                         style="border-radius: 20px; background-color: #EFF2FB; padding-bottom: 100px">
@@ -41,14 +43,4 @@
             </div>
         </form>
     </div>
-@endsection
-@section('javascript')
-    <!--
-    <script type="module">
-        $().ready(function() {
-            let valorPedido = new Inputmask('R$ 9999.99')
-            valorPedido.mask("#valorPedido");
-        });
-    </script>
-    -->
 @endsection

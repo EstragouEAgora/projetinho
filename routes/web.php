@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 /* ROTAS QUE NÃO PASSAM PELO CONTROLLER
- - Rota raiz */
+- Rota raiz */
 
 Route::get('/', function () {
     return view('sistema.index');
@@ -28,12 +28,12 @@ Route::get('/suporte', function () {
 Auth::routes();
 
 /* Rotas COM autenticação
-    - DASHBOARDS */
+- DASHBOARDS */
 
 Route::get('/dashboard', function () {
     return view('sistema.dashboard.dashboardClient');
 });
-   
+
 Route::get('/dashboard/Prestador', function () {
     return view('sistema.dashboard.dashboardPrestador');
 });
@@ -41,7 +41,6 @@ Route::get('/dashboard/Prestador', function () {
 Route::get('/dashboard/Adm', function () {
     return view('sistema.dashboard.dashboardAdm');
 });
-
 
 Route::get('/dashboard/funcionalidades', function () {
     return view('sistema.suporte.funcionalidadesDash');
@@ -62,7 +61,6 @@ Route::get('/dashboard/perfil', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 // Controller do Pedido
 
 Route::get('/dashboard/pedidos', [App\Http\Controllers\controladorPedido::class, 'listaPedidos'])->name('listagemPedidos');
@@ -76,7 +74,6 @@ Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPed
 // Controller do Candidato
 
 Route::post('/dashboard/pedidos/candidatar/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'store'])->name('candidatar');
-
 
 // Controller do Pedido
 
@@ -98,14 +95,12 @@ Route::get('/servico/delete/{id}', [App\Http\Controllers\controladorServico::cla
 
 //Controller do Profile
 
-Route::get('/perfil', [App\Http\Controllers\controladorProfile::class, 'index'])->name('perfil');
+Route::get('/dashboard/perfil', [App\Http\Controllers\controladorProfile::class, 'index'])->name('perfil');
 
-Route::post('/perfil/atualizar/{id}', [App\Http\Controllers\controladorProfile::class, 'update'])->name('atualizaPerfil');
+Route::post('/dashboard/perfil/atualizar/{id}', [App\Http\Controllers\controladorProfile::class, 'update'])->name('atualizaPerfil');
 
 Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::class, 'avaliacao'])->name('avaliaCliente');
 
+Route::get('/dashboard/avaliar/{id}', [App\Http\Controllers\controladorProfile::class, 'editAv'])->name('Avaliar');
 
-
-
-
-
+Route::post('/dashboard/avaliar/{id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');

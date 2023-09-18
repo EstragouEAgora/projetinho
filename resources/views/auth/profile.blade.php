@@ -56,14 +56,14 @@
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
-                    @foreach ($user_servico as $item)
+                    @foreach ($servicosPrestados as $item)
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckChecked"
-                            value="{{ $item->id }}">
-                        <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
+                            value="{{ $item->servico_id }}">
+                        <label class="form-check-label" for="servicos">{{ $item->servico->nomeServico }}</label>
                     @endforeach
                     @foreach ($servicos as $item)
-                        @foreach ($servicosCadastrados as $value)
-                            @if ($item->id != $svalue)
+                        @foreach ($servicosPrestados as $value)
+                            @if ($item->id != $svalue->servico_id)
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckDefault"
                                     value="{{ $item->id }}">
                                 <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>

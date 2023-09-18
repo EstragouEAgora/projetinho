@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Candidatos;
 use App\Models\Pedido;
+use App\Models\Servico;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 

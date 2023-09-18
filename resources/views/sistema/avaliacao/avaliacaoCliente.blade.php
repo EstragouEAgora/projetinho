@@ -2,6 +2,22 @@
 @section('title', 'Home | Estragou, e agora?')
 @section('content')
     <div class="container">
+        <div class="card border" style="margin-top: 60px; border: none;">
+            @if (session()->get('danger'))
+                <div class="alert alert-danger">
+                    {{ session()->get('danger') }}
+                </div><br />
+            @elseif (session()->get('success'))
+                <div class="alert alert-success"
+                    style="text-align: center; padding: 5px; margin: 0; border: none; background-color: #28a745;">
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 18px; color: white;">{{ session()->get('success') }}</span>
+                    </div>
+                </div><br />
+            @endif
+        </div>
+    </div>
+    <div class="container">
         <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 50px"><b>Avaliação - Prestadores de Serviço</b></p>
         @foreach ($dados as $item)
             <div class="col-md-4 mb-3">
@@ -20,12 +36,20 @@
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <p>Ainda não avaliado!</p>
+                                <button class="btn btn-secondary" id="botaozin-padrao"
+                                    href="/dashboard/avaliar/{{ $item->id }}">
+                                    Avaliar
+                                </button>
                             @elseif ($item->avaliacao == 0)
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                <button class="btn btn-secondary" id="botaozin-padrao"
+                                    href="/dashboard/avaliar/{{ $item->id }}">
+                                    Avaliar
+                                </button>
                             @else
                                 @for ($i = 0; $i < $item->avaliacao; $i++)
                                     <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
@@ -33,11 +57,19 @@
                                 @for ($i = 0; $i < $item->resto; $i++)
                                     <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 @endfor
+                                <button class="btn btn-secondary" id="botaozin-padrao"
+                                    href="/dashboard/avaliar/{{ $item->id }}">
+                                    Avaliar
+                                </button>
                             @endif
                         @else
                             @for ($i = 0; $i < $item->avaliacao; $i++)
                                 <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
                             @endfor
+                            <button class="btn btn-secondary" id="botaozin-padrao"
+                                href="/dashboard/avaliar/{{ $item->id }}">
+                                Avaliar
+                            </button>
                         @endif
                     </div>
                 </div>
