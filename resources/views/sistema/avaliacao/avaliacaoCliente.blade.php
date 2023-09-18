@@ -1,5 +1,5 @@
 @extends('sistema.layout.layoutDash')
-@section('title', 'Home | Estragou, e agora?')
+@section('title', 'Avaliação | Estragou, e agora?')
 @section('content')
     <div class="container">
         <div class="card border" style="margin-top: 60px; border: none;">

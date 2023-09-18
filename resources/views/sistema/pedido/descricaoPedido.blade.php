@@ -1,5 +1,5 @@
 @extends('sistema.layout.layoutDash')
-@section('title','Pedido | Estragou, e agora?')
+@section('title','Pedidos | Estragou, e agora?')
 @section('content')
     <p class="h1 text-start" id="titulo-da-pagina"><b>Descrição do Pedido</b></p>
     <p id="subtitulo-da-pagina">Aqui está a descrição do serviço solicitado pelo cliente para você! Sinta-se à vontade para ajustar o campo de valor de acordo com o preço do serviço que você irá oferecer.</p>

@@ -1,5 +1,5 @@
 @extends('sistema.layout.layoutDash')
-@section('title', 'Home | Estragou, e agora?')
+@section('title', 'Pedidos | Estragou, e agora?')
 @section('content')
     <div class="container" style="margin-top: 60px">
         <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Lista de Pedidos</b></p>
