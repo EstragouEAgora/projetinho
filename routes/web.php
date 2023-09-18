@@ -103,4 +103,4 @@ Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::cla
 
 Route::get('/dashboard/avaliar/{id}', [App\Http\Controllers\controladorProfile::class, 'editAv'])->name('Avaliar');
 
-Route::post('/dashboard/avaliar/{id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');
+Route::post('/dashboard/avaliando/{id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');

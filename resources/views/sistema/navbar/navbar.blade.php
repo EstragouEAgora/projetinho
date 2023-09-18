@@ -16,14 +16,14 @@
                     data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
                     aria-label="Toggle navigation" style="border: none; margin-right: 13px">
                     <span class="navbar-toggle">
-                        <img src="{{ asset('storage/imagens/clientePadrao.png') }}"
+                        <img src="/storage/{{Auth::User()->fotoPerfil}}"
                             style="width: 40px; border-radius: 100px; " />
                     </span>
                 </button>
             </div>
             <div style="margin-right: 24px;">
                 <p style="color: white; font-size: 20px; cursor: pointer;" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar"><b>{{ Auth::user()->name }}</b></p>
+                    data-bs-target="#offcanvasDarkNavbar"><b>{{ Auth::user()->apelido }}</b></p>
                 <p style="color: white; font-size: 15px; margin-top: -20px; cursor: pointer;" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasDarkNavbar">{{ Auth::user()->email }}</p>
             </div>
@@ -94,7 +94,7 @@
                 </li>
             @endif
             <li class="nav-item active flex-sm-fill" id="navbar-topicos">
-                <a class="nav-link" href="/perfil" id="navbar-topicos-nome">
+                <a class="nav-link" href="/dashboard/perfil" id="navbar-topicos-nome">
                     <i class="bi bi-gear">
                         <img src="{{ asset('storage/imagens/profile.svg') }}" />
                     </i>

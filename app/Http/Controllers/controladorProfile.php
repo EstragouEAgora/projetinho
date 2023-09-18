@@ -18,7 +18,10 @@ class controladorProfile extends Controller
         $dados = Auth::User();
         if (Auth::User()->tipo == 2) {
             $servicosPrestados = User_Servico::where('user_id', '=', Auth::User()->id)->get();
-            $servicos = Servico::all();
+            $servicos = array();
+            foreach ($servicosPrestados as $item) {
+                $servicos = Servico::where('id', '!=', $item->servico_id)->get();
+            }
             return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
         } else {
             return view('auth.profile', compact('dados'));
@@ -30,22 +33,34 @@ class controladorProfile extends Controller
     E redireciona para a mesma página, porém com os dados atualizados */
     public function update(Request $request, string $id)
     {
-        $dados = Auth::User();
-        $dadosErro = Auth::User();
+        $dados = User::find($id);
+        $conexao = User_Servico::where('user_id', '=', Auth::User()->id)->get();
         if (isset($dados)) {
-            $path = $request->file('fotoPerfil')->store('imagens', 'public');
+            if(null !== $request->file('fotoPerfil')){
+                $path = $request->file('fotoPerfil')->store('imagens', 'public');
+            }
+            if(null !== $request->input('servicos')){
+                $conexao->user_id = Auth::User()->id;
+                $conexao->servico_id = $request->input('servicos');
+                $conexao->save();
+            }
             $dados->name = ucfirst($request->input('name'));
             $dados->apelido = ucfirst($request->input('apelido'));
             $dados->email = $request->input('email');
-            $dados->telefone = $request->input('phone');
+            $dados->telefone = $request->input('telefone');
             $dados->tipo = $dados->tipo;
             $dados->avaliacao = $dados->avaliacao;
             $dados->password = $dados->password;
-            $dados->fotoPerfil = $path;
+            if(isset($path)){
+                $dados->fotoPerfil = $path;
+            }
+            else{
+                $dados->fotoPerfil = $dados->fotoPerfil;
+            }            
             $dados->save();
-            return redirect('/perfil')->with('success', 'Seu perfil foi atualizado com sucesso!');
+            return redirect('/dashboard/perfil')->with('success', 'Seu perfil foi atualizado com sucesso!');
         } else {
-            return redirect('/perfil')->with('danger', 'Não deu para editar seu perfil!!');
+            return redirect('/dashboard/perfil')->with('danger', 'Não deu para editar seu perfil!!');
         }
     }
 
@@ -102,7 +117,7 @@ class controladorProfile extends Controller
 
     public function editAv(string $id)
     {
-        $dados = User::finf($id);
+        $dados = User::find($id);
         if (isset($dados)) {
             return view('sistema.avaliacao.avaliarPrestador', compact('dados'));
         } else {

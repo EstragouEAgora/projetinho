@@ -2,36 +2,36 @@
 @section('title', 'Perfil | Editar Informações Pessoais')
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="text-center">
-                <img src="{{ asset('storage/imagens/person-fill.svg') }}"
-                    style="width: 250px; border-radius: 100px; margin-top: 55px;" />
-                <h4 style="color: #38393C; font-size: 35px">{{ Auth::user()->name }}</h4>
-                <p style="color: #ABAEB7; font-size: 20px">{{ Auth::user()->email }}</p>
+        <form method="POST" action="/dashboard/perfil/atualizar/{{ Auth::User()->id }}" enctype="multipart/form-data">
+            @csrf
+            <div class="d-flex justify-content-center align-items-center">
+
+                <div class="profile-container">
+                    <label for="fotoPerfil">
+                        <img src="/storage/{{ $dados->fotoPerfil }}" class="profile-image" id="fotoPerfil"
+                            onclick="openFileSelector()" onmouseout="hideEditText(this)" />
+                        <div class="edit-button">Editar Foto
+                            <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil"
+                                style="border-radius: 40px; background-color: #EFF2FB">
+                        </div>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="card" id="editar-perfil">
-            <form method="POST" action="/perfil/atualizar/{{ Auth::User()->id }}">
-                @csrf
-
-                <!-- <img src="{{ $dados['fotoPerfil'] }}" class="card-img-top" alt="{{ $dados['fotoPerfil'] }}"> -->
-                <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil" required
-                    style="border-radius: 40px; background-color: #EFF2FB">
-
+            <div class="card" id="editar-perfil">
                 <label for="apelido">
                     <p class="h4">Apelido:</p>
                 </label>
                 <div>
-                    <input type="text" class="form-control" name="apelido" value="{{ Auth::user()->apelido }}" required
+                    <input type="text" class="form-control" name="apelido" value="{{ Auth::user()->apelido }}"
                         autocomplete="apelido" style="border-radius: 40px; background-color: #ffff">
                 </div>
 
 
                 <label for="name">
-                    <p class="h4">Nome:</p>
+                    <p class="h4">Nome Completo:</p>
                 </label>
                 <div>
-                    <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required
+                    <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}"
                         autocomplete="name" style="border-radius: 40px; background-color: #ffff">
                 </div>
 
@@ -40,43 +40,41 @@
                     <p class="h4" style="margin-top: 20px">Email:</p>
                 </label>
                 <div>
-                    <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required
+                    <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}"
                         autocomplete="email" style="border-radius: 40px; background-color: #ffff">
                 </div>
 
-                <label for="phone">
+                <label for="telefone">
                     <p class="h4" style="margin-top: 20px">Telefone:</p>
                 </label>
                 <div>
                     <input id="telmask" type="text" class="telefone form-control" name="telefone"
-                        value="{{ Auth::user()->telefone }}" required autocomplete="telefone"
-                        style="border-radius: 40px; background-color: #ffff">
+                        value="{{ Auth::user()->telefone }}" style="border-radius: 40px; background-color: #ffff">
                 </div>
                 @if (Auth::User()->tipo == 2)
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
                     @foreach ($servicosPrestados as $item)
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckChecked"
-                            value="{{ $item->servico_id }}">
-                        <label class="form-check-label" for="servicos">{{ $item->servico->nomeServico }}</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="servicos" checked disabled>
+                            <label class="form-check-label" for="servicos">{{ $item->servico->nomeServico }}</label>
+                        </div>
                     @endforeach
+
                     @foreach ($servicos as $item)
-                        @foreach ($servicosPrestados as $value)
-                            @if ($item->id != $svalue->servico_id)
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1 flexSwitchCheckDefault"
-                                    value="{{ $item->id }}">
-                                <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
-                            @endif
-                        @endforeach
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="{{$item->id}}">
+                            <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
+                        </div>
                     @endforeach
                 @endif
                 <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
                     <button type="button" id="botaozin-padrao" href="/home">Cancelar</button>
                     <button type="submit" id="botaozin-padrao">Salvar Alterações</button>
                 </div>
-            </form>
-        </div>
+        </form>
+    </div>
     </div>
     <script type="module">
         $().ready(function() {
