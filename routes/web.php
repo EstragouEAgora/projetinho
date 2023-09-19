@@ -75,9 +75,8 @@ Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPed
 
 Route::post('/dashboard/pedidos/candidatar/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'store'])->name('candidatar');
 
-// Controller do Pedido
-
 Route::get('/dashboard/candidatos/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'show'])->name('verCandidatos');
+
 
 // Controller do Serviço
 

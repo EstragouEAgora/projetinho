@@ -1,7 +1,7 @@
 @extends('sistema.layout.layoutDash')
 @section('title', 'Pedidos | Estragou, e agora?')
 @section('content')
-    <div class="container" style="margin-top: 60px">
+    <div class="container" style="margin-top: 150px">
         <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Lista de Pedidos</b></p>
         <p id="subtitulo-da-pagina">Essa é a lista de pedidos que você enviou</p>
         @foreach ($pedidos as $item)

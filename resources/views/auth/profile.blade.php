@@ -8,11 +8,9 @@
 
                 <div class="profile-container">
                     <label for="fotoPerfil">
-                        <img src="/storage/{{ $dados->fotoPerfil }}" class="profile-image" id="fotoPerfil"
-                            onclick="openFileSelector()" onmouseout="hideEditText(this)" />
-                        <div class="edit-button">Editar Foto
-                            <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil"
-                                style="border-radius: 40px; background-color: #EFF2FB">
+                        <img src="/storage/{{ $dados->fotoPerfil }}" class="profile-image" onmouseout="hideEditText(this)" />
+                        <div class="edit-button" style="width: 100%; heigth: 100%">Editar Sua Foto
+                            <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil">
                         </div>
                     </label>
                 </div>
@@ -28,7 +26,7 @@
 
 
                 <label for="name">
-                    <p class="h4">Nome Completo:</p>
+                    <p class="h4" style="margin-top: 20px">Nome Completo:</p>
                 </label>
                 <div>
                     <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}"
@@ -55,19 +53,26 @@
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
-                    @foreach ($servicosPrestados as $item)
+
+
+
+
+
+                    @forelse ($servicosPrestados as $item)
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="servicos" checked disabled>
                             <label class="form-check-label" for="servicos">{{ $item->servico->nomeServico }}</label>
                         </div>
-                    @endforeach
-
+                    @empty
+                    
+                    @endforelse 
                     @foreach ($servicos as $item)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="{{$item->id}}">
+                            <input class="form-check-input" type="radio" name="servicos" id="inlineRadio1" 
+                                value={{$item->id}}>
                             <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
                         </div>
-                    @endforeach
+                    @endforeach                   
                 @endif
                 <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
                     <button type="button" id="botaozin-padrao" href="/home">Cancelar</button>

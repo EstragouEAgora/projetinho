@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Servico;
 use App\Models\User;
 use App\Models\User_Servico;
+use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//Illuminate\Database\Eloquent\Collection::avg();
 
 class controladorProfile extends Controller
 {
@@ -34,12 +35,12 @@ class controladorProfile extends Controller
     public function update(Request $request, string $id)
     {
         $dados = User::find($id);
-        $conexao = User_Servico::where('user_id', '=', Auth::User()->id)->get();
+        $conexao = new User_Servico();
         if (isset($dados)) {
-            if(null !== $request->file('fotoPerfil')){
+            if (null !== $request->file('fotoPerfil')) {
                 $path = $request->file('fotoPerfil')->store('imagens', 'public');
             }
-            if(null !== $request->input('servicos')){
+            if (null !== $request->input('servicos')) {
                 $conexao->user_id = Auth::User()->id;
                 $conexao->servico_id = $request->input('servicos');
                 $conexao->save();
@@ -51,12 +52,11 @@ class controladorProfile extends Controller
             $dados->tipo = $dados->tipo;
             $dados->avaliacao = $dados->avaliacao;
             $dados->password = $dados->password;
-            if(isset($path)){
+            if (isset($path)) {
                 $dados->fotoPerfil = $path;
-            }
-            else{
+            } else {
                 $dados->fotoPerfil = $dados->fotoPerfil;
-            }            
+            }
             $dados->save();
             return redirect('/dashboard/perfil')->with('success', 'Seu perfil foi atualizado com sucesso!');
         } else {

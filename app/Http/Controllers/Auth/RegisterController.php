@@ -51,7 +51,7 @@ class RegisterController extends Controller
               esse valor que será tratado posteriormente
               para ter o significado de "Ainda não avaliado" */
             'avaliacao' => 6,
-            'fotoPerfil' => '',
+            'fotoPerfil' => 'imagens/2IjfQ3vOB8g6MS1uoSNbAUc1BXHX284OaSfPZHgP.png',
             'password' => Hash::make($data['password']),
         ];
 

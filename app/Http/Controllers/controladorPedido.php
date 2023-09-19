@@ -37,15 +37,8 @@ class controladorPedido extends Controller
         $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
         $valor = (double) $valor;
         $dados->valorPedido = $valor;
-        if (isset($dados)) {
-            $dados->save();
-            $listaCand = new Candidatos();
-            $listaCand->pedido_id = $dados->id;
-            return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
-        } else {
-            return redirect('/home')->with('danger', 'Não foi possível cadastrar seu pedido!');
-        }
-
+        $dados->save();
+        return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
     }
 
     /* A depender do tipo de usuário:
