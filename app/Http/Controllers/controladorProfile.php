@@ -19,10 +19,7 @@ class controladorProfile extends Controller
         $dados = Auth::User();
         if (Auth::User()->tipo == 2) {
             $servicosPrestados = User_Servico::where('user_id', '=', Auth::User()->id)->get();
-            $servicos = array();
-            foreach ($servicosPrestados as $item) {
-                $servicos = Servico::where('id', '!=', $item->servico_id)->get();
-            }
+            $servicos = Servico::all();
             return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
         } else {
             return view('auth.profile', compact('dados'));
@@ -38,7 +35,7 @@ class controladorProfile extends Controller
         $conexao = new User_Servico();
         if (isset($dados)) {
             if (null !== $request->file('fotoPerfil')) {
-                $path = $request->file('fotoPerfil')->store('imagens', 'public');
+                $path = $request->file('fotoPerfil')->store('imagens','public');
             }
             if (null !== $request->input('servicos')) {
                 $conexao->user_id = Auth::User()->id;
@@ -106,7 +103,7 @@ class controladorProfile extends Controller
     Depende do tipo de usuário logado (cliente ou prestador de serviço) */
     public function avaliacao()
     {
-        $dados = User::select('id', 'name', 'apelido', 'avaliacao')->from('users')->where('tipo', '=', 2)->get();
+        $dados = User::select('id', 'name', 'apelido', 'avaliacao','fotoPerfil')->from('users')->where('tipo', '=', 2)->get();
         foreach ($dados as $item) {
             if ($item->avaliacao < 5) {
                 $item->resto = 5 - $item->avaliacao;

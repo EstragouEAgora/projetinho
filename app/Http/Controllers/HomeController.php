@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pedido;
 use App\Models\Servico;
+use App\Models\User_Servico;
 
 class HomeController extends Controller
 {
@@ -22,12 +23,10 @@ class HomeController extends Controller
         if(Auth::user() -> tipo =='1'){
             $todos = Servico::all();
             return view('sistema.dashboard.dashboardClient', compact('todos'));
-        }   
-        if(Auth::user() -> tipo =='2'){
-            $pedidos = Pedido::where('user_id', Auth::User()->id);
-            return view('sistema.dashboard.dashboardPrestador', compact('pedidos'));
-        }
-        if(Auth::user() -> tipo =='3'){
+        } elseif (Auth::user() -> tipo =='2'){
+            $servicos = User_Servico::where('user_id', Auth::User()->id)->get();
+            return view('sistema.dashboard.dashboardPrestador', compact('servicos'));
+        } elseif (Auth::user() -> tipo =='3'){
             $todos = Servico::all();
             return view('sistema.dashboard.dashboardAdm', compact('todos'));
         }

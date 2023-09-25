@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <p class="h1 text-start" id="titulo-da-pagina"><b>Cadastrar Serviço</b></p>
-        <p id="subtitulo-da-pagina">Faça seu pedido de serviço preenchendo o formulário abaixo.</p>
+        <p id="subtitulo-da-pagina">Crie um novo tipo de serviço.</p>
         <div class="card" id="card-descricao-servico">
             <form method="POST" action="{{route('gravaNovoServico')}}" enctype="multipart/form-data">
                 @csrf

@@ -17,6 +17,11 @@
                             <a href="/dashboard/candidatos/{{ $item->id }}">
                                 <button class="btn btn-secondary" id="botaozin-padrao"> Candidatos </button>
                             </a>
+                            <a href="/pedidos/editar/{{ $item->id }}" id="link-sem-sublinhado">
+                                <i class="bi bi-pencil-fill">
+                                    <img src="{{ asset('storage/imagens/pencil-fill.svg') }}">
+                                </i>
+                            </a>
                         </div>
                     </div>
                 </div>

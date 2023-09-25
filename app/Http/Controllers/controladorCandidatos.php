@@ -49,6 +49,8 @@ class controladorCandidatos extends Controller
         return view('sistema.pedido.candidatosLista', compact('candidatos'));
     }
 
+    
+
     /* Apaga a lista de candidatos e redireciona para
     o perfil do prestador de serviço escolhido */
     public function destroy(string $id)

@@ -26,10 +26,14 @@
                 <div class="col-md-12 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body">
+                            <img class="card-img-top" src="/storage/{{ $item->servico->pedido->user->fotoPerfil }}">
                             <p class="h5 card-title">
                                 <span style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
                             </p>
                             <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
+                            @if ($value->valorPedido == 0)
+                                <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }} (não especificado)</p>
+                            @endif
                             <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
                             <!-- FORM -->
                             <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">

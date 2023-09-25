@@ -67,9 +67,13 @@ Route::get('/dashboard/pedidos', [App\Http\Controllers\controladorPedido::class,
 
 Route::get('/pedidos/{servico_id}', [App\Http\Controllers\controladorPedido::class, 'create'])->name('pedido');
 
+Route::get('/pedidos/editar/{id}', [App\Http\Controllers\controladorPedido::class, 'edit'])->name('pedido');
+
+Route::post('/pedidos/update/{id}', [App\Http\Controllers\controladorPedido::class, 'update'])->name('pedido');
+
 Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
 
-Route::get('/pedidos/detalhes/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'show'])->name('verPedido');
+Route::get('/pedidos/aceitar/{user_id}', [App\Http\Controllers\controladorPedido::class, 'aceitar'])->name('aceitarPedido');
 
 // Controller do Candidato
 

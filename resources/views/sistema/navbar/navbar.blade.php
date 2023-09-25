@@ -57,7 +57,7 @@
                     Home
                 </a>
             </li>
-            @if (Auth::user()->tipo != 3)
+            @if (Auth::user()->tipo == 1)
                 <li class="nav-item active flex-sm-fill" id="navbar-topicos">
                     <a class="nav-link" href="{{ route('listagemPedidos') }}" id="navbar-topicos-nome">
                         <i class="bi bi-list-ul">

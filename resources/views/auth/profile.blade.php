@@ -8,7 +8,7 @@
 
                 <div class="profile-container">
                     <label for="fotoPerfil">
-                        <img src="/storage/{{ $dados->fotoPerfil }}" class="profile-image" onmouseout="hideEditText(this)" />
+                        <img src="/storage/{{ Auth::User()->fotoPerfil }}" class="profile-image" onmouseout="hideEditText(this)" />
                         <div class="edit-button" style="width: 100%; heigth: 100%">Editar Sua Foto
                             <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil">
                         </div>
@@ -53,11 +53,6 @@
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
-
-
-
-
-
                     @forelse ($servicosPrestados as $item)
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="servicos" checked disabled>

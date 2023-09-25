@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candidatos;
 use App\Models\Pedido;
 use App\Models\Servico;
 use App\Models\User;
+use App\Models\Candidatos;
 use App\Models\User_Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,12 +34,24 @@ class controladorPedido extends Controller
         $idSer = session('idSer');
         $dados->servico_id = $idSer;
         $dados->descricaoPedido = $request->input('descricaoPedido');
-        $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
-        $valor = (double) $valor;
-        $dados->valorPedido = $valor;
+        if (null !== $request->input('valorPedido')) {
+            $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
+            $valor = (double) $valor;
+            $dados->valorPedido = $valor;
+        } else {
+            $dados->valorPedido = 0.0;
+        }
         $dados->save();
         return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
     }
+
+
+    public function aceitar(Request $request, $user_id)
+    {
+        $candidato = User::find($user_id);
+        return view('sistema.pedido.candidatoAceito', compact('candidato'));
+    }
+
 
     /* A depender do tipo de usuário:
     1 - Cliente
@@ -56,16 +68,16 @@ class controladorPedido extends Controller
             return view('sistema.pedido.listaPedidosCliente', compact('pedidos'));
         } elseif (Auth::User()->tipo == '2') {
             $servicos = User_Servico::where('user_id', Auth::User()->id)->get();
-            return view('sistema.pedido.listaPedidosPres', compact('servicos'));
+            return view('sistema.dashboard.dashboardPrestador', compact('servicos'));
         }
     }
 
     /* Envia para uma página de edição do pedido */
     public function edit(string $id)
     {
-        $pedido = Pedido::find($id);
-        if (isset($pedido)) {
-            return view('', compact('pedido'));
+        $dados = Pedido::find($id);
+        if (isset($dados)) {
+            return view('sistema.pedido.editarPedido', compact('dados'));
         }
         return redirect('sistema.pedido.listaPedidosCliente')->with('danger', 'Erro ao redirecionar à página de edição!');
     }
@@ -78,53 +90,61 @@ class controladorPedido extends Controller
         $pedido = Pedido::find($id);
         if (isset($pedido)) {
             $pedido->descricaoPedido = $request->input('descricaoPedido');
-            $pedido->valorPedido = $request->input('valorPedido');
-            $data->save();
+            if (null !== $request->input('valorPedido')) {
+                $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
+                $valor = (double) $valor;
+                $pedido->valorPedido = $valor;
+            } else {
+                $pedido->valorPedido = 0.0;
+            }
+            $pedido->save();
         } else {
-            return redirect('sistema.pedido.listaPedidosCliente')->with('danger', 'Erro ao editar seu pedido');
+            return redirect('/dashboard/pedidos')->with('danger', 'Erro ao editar seu pedido');
         }
-        return redirect('sistema.pedido.listaPedidosCliente')->with('success', 'Pedido editado com sucesso');
+        return redirect('/dashboard/pedidos')->with('success', 'Pedido editado com sucesso');
     }
 
     /* Envia email para os Prestadores de Serviço */
     public function enviarEmail(Request $request, string $id)
     {
         /*$pedidos = Pedido::find($id);
-        $servico = $pedidos->servico_id;
-        $users = User_Servico::where('servico_id', $servico)->get();
-        if (isset($users)) {
-            $mail->isSMTP();  //Define o uso de SMTP no envio
-            $mail->SMTPAuth = true; //Habilita a autenticação SMTP
-            $mail->Username= 'projetoestragoueagora@gmail.com';
-            $mail->Password   = 'TCC_2023';
-            // Criptografia do envio SSL também é aceito
-            $mail->SMTPSecure = 'tls';
-            // Informações específicadas pelo Google
-            $mail->Host = 'smtp.email.com';
-            $mail->Port = 587;
-            // Define o remetente
-            $mail->setFrom('projetoestragoueagora@gmail.com', ' Estragou, e agora?');
-            foreach ($users as $item) {
-                $email = $item->user->email;
-                $apelido = $item->user->apelido;
-                $mail->addAddress($email, $apelido); // Define o destinatário      
-                // Conteúdo da mensagem
-                $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
-                $mail->Subject = 'Novo Pedido para Você!';
-                $mail->Body    = 'Olá, {{$apelido}}, você tem um novo pedido do serviço de {{$item->servico->nomeServico}}
-                                    Entre agora no nosso site! Não perca essa oportunidade!';
-                $mail->AltBody = 'Olá! Você tem um novo pedido no Estragou e agora!';
-                // Enviar
-                $mail->send();
-            }
-            return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
-        } else {
-            return redirect('/home')->with('danger', 'Não foi possível cadastrar seu pedido!');
-        }
-        */
+    $servico = $pedidos->servico_id;
+    $users = User_Servico::where('servico_id', $servico)->get();
+    if (isset($users)) {
+    $mail->isSMTP();  //Define o uso de SMTP no envio
+    $mail->SMTPAuth = true; //Habilita a autenticação SMTP
+    $mail->Username= 'projetoestragoueagora@gmail.com';
+    $mail->Password   = 'TCC_2023';
+    // Criptografia do envio SSL também é aceito
+    $mail->SMTPSecure = 'tls';detalhes
+    // Informações específicadas pelo Google
+    $mail->Host = 'smtp.email.com';
+    $mail->Port = 587;
+    // Define o remetente
+    $mail->setFrom('projetoestragoueagora@gmail.com', ' Estragou, e agora?');
+    foreach ($users as $item) {
+    $email = $item->user->email;
+    $apelido = $item->user->apelido;
+    $mail->addAddress($email, $apelido); // Define o destinatário
+    // Conteúdo da mensagem
+    $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
+    $mail->Subject = 'Novo Pedido para Você!';
+    $mail->Body    = 'Olá, {{$apelido}}, você tem um novo pedido do serviço de {{$item->servico->nomeServico}}
+    Entre agora no nosso site! Não perca essa oportunidade!';
+    $mail->AltBody = 'Olá! Você tem um novo pedido no Estragou e agora!';
+    // Enviar
+    $mail->send();
+    }
+    return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
+    } else {
+    return redirect('/home')->with('danger', 'Não foi possível cadastrar seu pedido!');
+    }
+     */
     }
 
 
+
+    /* Apagar o pedido */
     public function destroy(string $id)
     {
         $dados = Pedido::find($id);

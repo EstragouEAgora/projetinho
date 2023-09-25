@@ -22,7 +22,7 @@
         @foreach ($dados as $item)
             <div class="col-md-4 mb-3">
                 <div class="card shadow-sm" style="width: 18rem;">
-                    <img src="{{ asset('storage/imagens/clientePadrao.png') }}">
+                    <img class="card-img-top" src="/storage/{{ $item->fotoPerfil }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->apelido }}</h5>
                         <p class="card-title">{{ $item->name }}</h5>

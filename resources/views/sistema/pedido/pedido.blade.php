@@ -24,7 +24,7 @@
                     style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor (R$):</label>
                 <p id="card-descricao-label-subtitulo">Digite nesse formato: 99.90</p>
                 <div id="card-descricao-valor">
-                    <input id="valorPedido" type="text" class="form-control valor" name="valorPedido" required
+                    <input id="valorPedido" type="text" class="form-control valor" name="valorPedido"
                         autocomplete="valorPedido" style="border-radius: 40px; background-color: #EFF2FB"
                         placeholder="99.90">
                 </div>

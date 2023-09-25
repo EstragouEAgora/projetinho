@@ -2,8 +2,8 @@
 @section('title','Adm | Estragou, e agora?')
 @section('content')
     <div class="container">
-        <p class="h1 text-start" id="titulo-da-pagina"><b>Cadastrar Serviço</b></p>
-        <p id="subtitulo-da-pagina">Faça seu pedido de serviço preenchendo o formulário abaixo.</p>
+        <p class="h1 text-start" id="titulo-da-pagina"><b>Editar Serviço</b></p>
+        <p id="subtitulo-da-pagina">Edite o serviço criado</p>
         <div class="card" id="card-descricao-servico">
             <form method="POST" action="/servico/update/{{$dados['id']}}" enctype="multipart/form-data">
             @csrf
