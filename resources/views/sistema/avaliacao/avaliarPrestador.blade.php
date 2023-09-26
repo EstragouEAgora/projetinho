@@ -4,7 +4,7 @@
     <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Avaliando Prestador</b></p>
     <p id="subtitulo-da-pagina"> Avalie o prestador abaixo de acordo com sua experiência!</p>
     <div class="card" id="card-descricao-servico">
-        <form method="POST" action="/dashboard/avaliar/{{ $dados->id }}">
+        <form method="POST" action="/dashboard/avaliando/{{ $dados->id }}">
             @csrf
             <div class="form-group">
                 <label for="avaliacao" class="h4 label-align"
@@ -14,7 +14,9 @@
                 @for ($i = 1; $i <= 5; $i++)
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="avaliacao" value={{ $i }}>
-                        <label class="form-check-label" for="avaliacao">{{ $i }}</label>
+                        <label class="form-check-label" for="avaliacao">
+                            <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                        </label>
                     </div>
                 @endfor
                 <button id="botaozin-padrao">

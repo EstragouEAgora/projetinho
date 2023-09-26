@@ -125,16 +125,16 @@ class controladorProfile extends Controller
     public function updateAv(Request $request, $id)
     {
         $dados = User::find($id);
-        $NovaAv = $request->input('avaliacao');
+        $novaAv = $request->input('avaliacao');
         $total = $dados->avaliacao + $novaAv;
-        $Media = intdiv($total, 2);
+        $media = intdiv($total, 2);
         if (isset($dados)) {
             $dados->name = $dados->name;
             $dados->apelido = $dados->apelido;
             $dados->email = $dados->email;
             $dados->telefone = $dados->telefone;
             $dados->tipo = $dados->tipo;
-            $dados->avaliacao = $Media;
+            $dados->avaliacao = $media;
             $dados->password = $dados->password;
             $dados->fotoPerfil = $dados->fotoPerfil;
             $dados->save();

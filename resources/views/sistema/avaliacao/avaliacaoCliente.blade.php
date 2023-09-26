@@ -36,20 +36,22 @@
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <p>Ainda não avaliado!</p>
-                                <button class="btn btn-secondary" id="botaozin-padrao"
-                                    href="/dashboard/avaliar/{{ $item->id }}">
-                                    Avaliar
-                                </button>
+                                <a href="/dashboard/avaliar/{{ $item->id }}">
+                                    <button class="btn btn-secondary" id="botaozin-padrao">
+                                        Avaliar
+                                    </button>
+                                </a>
                             @elseif ($item->avaliacao == 0)
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
-                                <button class="btn btn-secondary" id="botaozin-padrao"
-                                    href="/dashboard/avaliar/{{ $item->id }}">
-                                    Avaliar
-                                </button>
+                                <a href="/dashboard/avaliar/{{ $item->id }}">
+                                    <button class="btn btn-secondary" id="botaozin-padrao">
+                                        Avaliar
+                                    </button>
+                                </a>
                             @else
                                 @for ($i = 0; $i < $item->avaliacao; $i++)
                                     <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
@@ -57,19 +59,21 @@
                                 @for ($i = 0; $i < $item->resto; $i++)
                                     <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                                 @endfor
-                                <button class="btn btn-secondary" id="botaozin-padrao"
-                                    href="/dashboard/avaliar/{{ $item->id }}">
-                                    Avaliar
-                                </button>
+                                <a href="/dashboard/avaliar/{{ $item->id }}">
+                                    <button class="btn btn-secondary" id="botaozin-padrao">
+                                        Avaliar
+                                    </button>
+                                </a>
                             @endif
                         @else
                             @for ($i = 0; $i < $item->avaliacao; $i++)
                                 <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
                             @endfor
-                            <button class="btn btn-secondary" id="botaozin-padrao"
-                                href="/dashboard/avaliar/{{ $item->id }}">
-                                Avaliar
-                            </button>
+                            <a href="/dashboard/avaliar/{{ $item->id }}">
+                                <button class="btn btn-secondary" id="botaozin-padrao">
+                                    Avaliar
+                                </button>
+                            </a>
                         @endif
                     </div>
                 </div>
