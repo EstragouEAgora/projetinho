@@ -7,6 +7,7 @@ use App\Models\User_Servico;
 use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 //Illuminate\Database\Eloquent\Collection::avg();
 
 class controladorProfile extends Controller
@@ -19,6 +20,13 @@ class controladorProfile extends Controller
         $dados = Auth::User();
         if (Auth::User()->tipo == 2) {
             $servicosPrestados = User_Servico::where('user_id', '=', Auth::User()->id)->get();
+            try {
+                $a = $servicosPrestados[0];
+                
+                $servicos = Servico::where('id','!=');
+            } catch (Exception $th) {
+                //throw $th;
+            }
             $servicos = Servico::all();
             return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
         } else {
@@ -64,7 +72,7 @@ class controladorProfile extends Controller
     // Permite alterar a senha (além do método de "esqueci a senha" padrão)
     // O usuário terá que informar sua senha atual para mudá-la
     /* Método para alterar a senha (além do método próprio do Laravel)
-    O usuário deve informar sua senha atual para poder mudá-la*/
+    O usuário deve informar sua senha atual para poder mudá-la
     public function mudarSenha(Request $request)
     {
         $senhaAtual = $request->input('senhaAtual');
@@ -98,6 +106,7 @@ class controladorProfile extends Controller
             return redirect()->with('danger', 'Verfique se todos os campos foram preenchidos!');
         }
     }
+    */
 
     /* Método que permite mostrar a avaliação dos usuários
     Depende do tipo de usuário logado (cliente ou prestador de serviço) */

@@ -13,7 +13,7 @@
                 </p>
                 @for ($i = 1; $i <= 5; $i++)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="avaliacao" value={{ $i }}>
+                        <input class="form-check-input estrela" type="radio" id="sem-bolinha" name="avaliacao" value={{ $i }}>
                         <label class="form-check-label" for="avaliacao">
                             <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
                         </label>
@@ -25,4 +25,32 @@
             </div>
         </form>
     </div>
+@endsection
+@section('javascript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const estrelas = document.querySelectorAll('.estrela');
+
+            estrelas.forEach(estrela => {
+                estrela.addEventListener('click', function() {
+                    const valorAvaliacao = parseInt(estrela.value);
+                    preencherEstrelas(valorAvaliacao);
+                });
+            });
+
+            function preencherEstrelas(valorAvaliacao) {
+                estrelas.forEach(estrela => {
+                    const estrelaNumero = parseInt(estrela.value);
+                    const imagemEstrela = estrela.nextElementSibling.querySelector('img');
+
+                    if (estrelaNumero <= valorAvaliacao) {
+                        imagemEstrela.src = "{{ asset('storage/imagens/star-fill.svg') }}";
+                    } else {
+                        imagemEstrela.src = "{{ asset('storage/imagens/star.svg') }}";
+                    }
+                });
+            }
+        });
+    </script>
+
 @endsection

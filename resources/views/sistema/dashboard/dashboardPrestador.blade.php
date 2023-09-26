@@ -16,41 +16,45 @@
                 </div><br />
             @endif
         </div>
+        @forelse ($servicos as $item)
+            <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços para você</b></p>
+            <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
+            @foreach ($item->servico->pedido as $value)
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="h5 card-title">
+                                    <span
+                                        style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
+                                </p>
+                                <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
+                                <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
+                                <!-- FORM -->
+                                <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
+                                    @csrf
+                                    <label for="novoValor" class="h4 label-align"
+                                        style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor (R$):</label>
+                                    <p id="card-descricao-label-subtitulo">Sugira um novo valor para tal serviço...</p>
+                                    <div id="card-descricao-valor">
+                                        <input id="novoValor" type="text" class="form-control valor" name="novoValor"
+                                            required autocomplete="valorPedido"
+                                            style="border-radius: 40px; background-color: #EFF2FB"
+                                            value={{ $value->valorPedido }}>
+                                    </div>
 
-        <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços para você</b></p>
-        <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
-    </div>
-    @foreach ($servicos as $item)
-        @foreach ($item->servico->pedido as $value)
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">                            
-                            <p class="h5 card-title">
-                                <span style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
-                            </p>
-                            <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
-                            <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
-                            <!-- FORM -->
-                            <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
-                                @csrf
-                                <label for="novoValor" class="h4 label-align"
-                                    style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor (R$):</label>
-                                <p id="card-descricao-label-subtitulo">Sugira um novo valor para tal serviço...</p>
-                                <div id="card-descricao-valor">
-                                    <input id="novoValor" type="text" class="form-control valor" name="novoValor"
-                                        required autocomplete="valorPedido"
-                                        style="border-radius: 40px; background-color: #EFF2FB"
-                                        value={{ $value->valorPedido }}>
-                                </div>
+                                    <button class="btn btn-secondary" id="botaozin-padrao"> Candidatar-me </button>
 
-                                <button class="btn btn-secondary" id="botaozin-padrao"> Candidatar-me </button>
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    @endforeach
+            @endforeach
+        @empty
+            <p class="h1 text-start" id="titulo-da-pagina"><b>Voce ainda não se cadastrou em nenhum serviço!</b></p>
+            <p id="subtitulo-da-pagina">Vá até o seu <a href="/dashboard/perfil" id="link-sem-sublinhado">Perfil</a> e
+                associe-se a algum serviço!!</p>
+        @endforelse
+    </div>
 @endsection

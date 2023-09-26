@@ -24,10 +24,7 @@
                 <div class="card shadow-sm" style="width: 18rem;">
                     <img class="card-img-top" src="/storage/{{ $item->fotoPerfil }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $item->apelido }}</h5>
-                        <p class="card-title">{{ $item->name }}</h5>
-                    </div>
-                    <div class="card-body">
+                        <h5 class="txt-card-dash-cliente"><b>{{ $item->apelido }}</b></h5>
                         @if ($item->avaliacao != 5)
                             @if ($item->avaliacao == 6)
                                 <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
@@ -78,6 +75,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+    </div>
+    @endforeach
     </div>
 @endsection

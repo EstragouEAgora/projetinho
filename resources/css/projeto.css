@@ -305,3 +305,12 @@
   display: block;
   }
   
+
+  #sem-bolinha {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    outline: none;
+}
