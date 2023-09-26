@@ -73,7 +73,7 @@ Route::post('/pedidos/update/{id}', [App\Http\Controllers\controladorPedido::cla
 
 Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, 'store'])->name('gravaNovoPedido');
 
-Route::get('/pedidos/aceitar/{user_id}', [App\Http\Controllers\controladorPedido::class, 'aceitar'])->name('aceitarPedido');
+Route::get('/pedidos/aceitar/{user_id}/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'aceitar'])->name('aceitarPedido');
 
 // Controller do Candidato
 

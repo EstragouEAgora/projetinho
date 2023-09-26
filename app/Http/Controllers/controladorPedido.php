@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Candidatos;
 use App\Models\User_Servico;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; 
 
 class controladorPedido extends Controller
 {
@@ -46,10 +46,16 @@ class controladorPedido extends Controller
     }
 
 
-    public function aceitar(Request $request, $user_id)
+    public function aceitar(Request $request, $user_id, $pedido_id)
     {
         $candidato = User::find($user_id);
-        return view('sistema.pedido.candidatoAceito', compact('candidato'));
+        $dados = Candidatos::where('pedido_id','=',$pedido_id)->get();
+        if (isset($dados)) {
+            $dados->delete();
+            return view('sistema.pedido.candidatoAceito', compact('candidato','aceitar'));
+        } else {
+            return redirect('/dashboard/pedidos')->with('danger', 'Não foi possível aceitar esse candidato! Tente novamente mais tarde!');
+        }
     }
 
 

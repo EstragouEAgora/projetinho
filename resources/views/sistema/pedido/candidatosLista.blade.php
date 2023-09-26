@@ -19,7 +19,7 @@
                                 <p class="card-text"><b>Descrição:</b>{{ $item->pedido->descricaoPedido }}</p>
                                 <p class="card-text"><b>Valor Proposto:</b> R$ {{ $item->novoValor }}</p>
                             </div>
-                            <a href="/pedidos/aceitar/{{ $item['user_id'] }}">
+                            <a href="/pedidos/aceitar/{{ $item['user_id'] }}/ {{ $item->pedido['id']}}">
                                 <button class="btn btn-secondary" id="botaozin-padrao">Aceitar</button>
                             </a>
                         </div>
