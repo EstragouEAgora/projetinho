@@ -17,7 +17,7 @@
             @endif
         </div>
         <p class="h1 text-start" id="titulo-da-pagina"><b>Serviços para você</b></p>
-            <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
+        <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
         @forelse ($servicos as $item)
             @foreach ($item->servico->pedido as $value)
                 <div class="row">
@@ -32,10 +32,11 @@
                                 <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
                                 <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
                                     @csrf
-                                    <div style="display: none">
+                                    <div class="campo-novo-valor" style="display: none;">
                                         <label for="novoValor" class="h4 label-align"
                                             style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor
-                                            (R$):</label>
+                                            (R$)
+                                            :</label>
                                         <p id="card-descricao-label-subtitulo">Sugira um novo valor para tal serviço...</p>
                                         <div id="card-descricao-valor">
                                             <input id="novoValor" type="text" class="form-control valor" name="novoValor"
@@ -43,11 +44,11 @@
                                                 style="border-radius: 40px; background-color: #EFF2FB"
                                                 value={{ $value->valorPedido }}>
                                         </div>
-                                        <button class="btn btn-secondary" id="botaozin-padrao" onclick="toggleCampoNovoValor()">
-                                            Candidatar-me </button>
+                                        <button class="btn btn-secondary" id="botaozin-padrao">Candidatar-me</button>
                                     </div>
-                                        <label for="toggleNovoValor" class="btn btn-secondary" id="botaozin-padrao" onclick="toggleCampoNovoValor()"> Candidatar-me </label>
-                                        <input type="checkbox" id="toggleNovoValor" style="display: none;">
+                                    <div class="campo-novo-valor">
+                                        <a href="#" class="btn btn-secondary botao-candidatar" data-id="{{ $value->id }}"> Candidatar-me </a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -63,17 +64,21 @@
 @endsection
 @section('javascript')
     <script>
-        let campoNovoValorVisivel = false;
+        const botoesCandidatar = document.querySelectorAll('.botao-candidatar');
 
-        function toggleNovoValor() {
-            const campoNovoValor = document.getElementById('card-descricao-valor');
-            campoNovoValorVisivel = !campoNovoValorVisivel;
+        botoesCandidatar.forEach(botao => {
+            botao.addEventListener('click', function() {
+                const id = botao.getAttribute('data-id');
+                const campoNovoValor = document.querySelector(`#campo-novo-valor-${id}`);
 
-            if (campoNovoValorVisivel) {
-                campoNovoValor.style.display = 'block';
-            } else {
-                campoNovoValor.style.display = 'none';
-            }
-        }
+                if (campoNovoValor.style.display === 'none' || campoNovoValor.style.display === '') {
+                    campoNovoValor.style.display = 'block';
+                    botao.innerText = 'Cancelar';
+                } else {
+                    campoNovoValor.style.display = 'none';
+                    botao.innerText = 'Candidatar-me';
+                }
+            });
+        });
     </script>
 @endsection
