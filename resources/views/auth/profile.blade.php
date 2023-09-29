@@ -8,7 +8,8 @@
 
                 <div class="profile-container">
                     <label for="fotoPerfil">
-                        <img src="/storage/{{ Auth::User()->fotoPerfil }}" class="profile-image" onmouseout="hideEditText(this)" />
+                        <img src="/storage/{{ Auth::User()->fotoPerfil }}" class="profile-image"
+                            onmouseout="hideEditText(this)" />
                         <div class="edit-button" style="width: 100%; heigth: 100%">Editar Sua Foto
                             <input id="fotoPerfil" type="file" class="form-control" name="fotoPerfil">
                         </div>
@@ -50,24 +51,62 @@
                         value="{{ Auth::user()->telefone }}" style="border-radius: 40px; background-color: #ffff">
                 </div>
                 @if (Auth::User()->tipo == 2)
+                    <label>
+                        <p class="h4" style="margin-top: 20px">Sua avaliação:</p>
+                    </label>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @if (Auth::User()->avaliacao != 5)
+                                @if (Auth::User()->avaliacao == 6)
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <p> Você ainda não avaliado(a)!</p>
+                                @else
+                                    @for ($i = 0; $i < Auth::User()->avaliacao; $i++)
+                                        <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
+                                    @endfor
+                                    @for ($i = 0; $i < $dados->resto; $i++)
+                                        <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    @endfor
+                                @endif
+                            @else
+                                @for ($i = 0; $i < Auth::User()->avaliacao; $i++)
+                                    <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
+                                @endfor
+                            @endif
+                        </div>
+                    </div>
+
+
+
+
+
                     <label for="servicos">
                         <p class="h4" style="margin-top: 20px">Serviços Prestados:</p>
                     </label>
-                    @forelse ($servicosPrestados as $item)
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="servicos" checked disabled>
-                            <label class="form-check-label" for="servicos">{{ $item->servico->nomeServico }}</label>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            @forelse ($servicosPrestados as $item)
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="servicos" checked
+                                        disabled>
+                                    <label class="form-check-label"
+                                        for="servicos">{{ $item->servico->nomeServico }}</label>
+                                </div>
+                            @empty
+                            @endforelse
+                            @foreach ($servicos as $item)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="servicos" id="inlineRadio1"
+                                        value={{ $item->id }}>
+                                    <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
+                                </div>
+                            @endforeach
                         </div>
-                    @empty
-                    
-                    @endforelse 
-                    @foreach ($servicos as $item)
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="servicos" id="inlineRadio1" 
-                                value={{$item->id}}>
-                            <label class="form-check-label" for="servicos">{{ $item->nomeServico }}</label>
-                        </div>
-                    @endforeach                   
+                    </div>
                 @endif
                 <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
                     <button type="button" id="botaozin-padrao" href="/home">Cancelar</button>

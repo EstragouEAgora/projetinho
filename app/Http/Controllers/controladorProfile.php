@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servico;
 use App\Models\User;
 use App\Models\User_Servico;
-use App\Models\Servico;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Exception;
+
 //Illuminate\Database\Eloquent\Collection::avg();
 
 class controladorProfile extends Controller
@@ -22,13 +23,18 @@ class controladorProfile extends Controller
             $servicosPrestados = User_Servico::where('user_id', '=', Auth::User()->id)->get();
             try {
                 $a = $servicosPrestados[0];
-                
-                $servicos = Servico::where('id','!=');
+                $servicosPrestadosIDs = $servicosPrestados->pluck('servico_id')->toArray();
+                $servicos = Servico::whereNotIn('id', $servicosPrestadosIDs)->get();
+                $dados->resto = 5 - $dados->avaliacao;
+                return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
             } catch (Exception $th) {
-                //throw $th;
+                $servicos = Servico::all();
+                $dados->resto = 5 - $dados->avaliacao;
+                return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
+
             }
-            $servicos = Servico::all();
-            return view('auth.profile', compact('dados', 'servicosPrestados', 'servicos'));
+            
+
         } else {
             return view('auth.profile', compact('dados'));
         }
@@ -43,7 +49,7 @@ class controladorProfile extends Controller
         $conexao = new User_Servico();
         if (isset($dados)) {
             if (null !== $request->file('fotoPerfil')) {
-                $path = $request->file('fotoPerfil')->store('imagens','public');
+                $path = $request->file('fotoPerfil')->store('imagens', 'public');
             }
             if (null !== $request->input('servicos')) {
                 $conexao->user_id = Auth::User()->id;
@@ -75,44 +81,44 @@ class controladorProfile extends Controller
     O usuário deve informar sua senha atual para poder mudá-la
     public function mudarSenha(Request $request)
     {
-        $senhaAtual = $request->input('senhaAtual');
-        $senhaBD = Auth::User()->password;
-        if (isset($senhaBD) && isset($senhaAtual)) {
-            $senhaAtual = Hash::$senhaAtual;
-            if ($senhaAtual === $senhaBD) {
-                $novaSenha1 = $request->input('novaSenha');
-                $novaSenha2 = $request->input('confirmacaoSenha');
-                if (isset($novaSenha1) && isset($novaSenha2)) {
-                    if ($novaSenha1 === $novaSenha2) {
-                        $hashNovaSenha = Hash::$novaSenha1;
-                        if ($hashNovaSenha !== $senhaBD) {
-                            $dados = Auth::User();
-                            $dados->password = $hashNovaSenha;
-                            $dados->save();
-                            return redirect()->with('success', 'Sua senha foi alterada com sucesso!');
-                        } else {
-                            return redirect()->with('danger', 'Sua nova senha não pode ser igual à antiga!!!');
-                        }
-                    } else {
-                        return redirect()->with('danger', 'As senhas não coincidem!');
-                    }
-                } else {
-                    return redirect()->with('danger', 'Verfique se todos os campos foram preenchidos!');
-                }
-            } else {
-                return redirect()->with('danger', 'A senha atual não coincide!');
-            }
-        } else {
-            return redirect()->with('danger', 'Verfique se todos os campos foram preenchidos!');
-        }
+    $senhaAtual = $request->input('senhaAtual');
+    $senhaBD = Auth::User()->password;
+    if (isset($senhaBD) && isset($senhaAtual)) {
+    $senhaAtual = Hash::$senhaAtual;
+    if ($senhaAtual === $senhaBD) {
+    $novaSenha1 = $request->input('novaSenha');
+    $novaSenha2 = $request->input('confirmacaoSenha');
+    if (isset($novaSenha1) && isset($novaSenha2)) {
+    if ($novaSenha1 === $novaSenha2) {
+    $hashNovaSenha = Hash::$novaSenha1;
+    if ($hashNovaSenha !== $senhaBD) {
+    $dados = Auth::User();
+    $dados->password = $hashNovaSenha;
+    $dados->save();
+    return redirect()->with('success', 'Sua senha foi alterada com sucesso!');
+    } else {
+    return redirect()->with('danger', 'Sua nova senha não pode ser igual à antiga!!!');
     }
-    */
+    } else {
+    return redirect()->with('danger', 'As senhas não coincidem!');
+    }
+    } else {
+    return redirect()->with('danger', 'Verfique se todos os campos foram preenchidos!');
+    }
+    } else {
+    return redirect()->with('danger', 'A senha atual não coincide!');
+    }
+    } else {
+    return redirect()->with('danger', 'Verfique se todos os campos foram preenchidos!');
+    }
+    }
+     */
 
     /* Método que permite mostrar a avaliação dos usuários
     Depende do tipo de usuário logado (cliente ou prestador de serviço) */
     public function avaliacao()
     {
-        $dados = User::select('id', 'name', 'apelido', 'avaliacao','fotoPerfil')->from('users')->where('tipo', '=', 2)->get();
+        $dados = User::select('id', 'name', 'apelido', 'avaliacao', 'fotoPerfil')->from('users')->where('tipo', '=', 2)->get();
         foreach ($dados as $item) {
             if ($item->avaliacao < 5) {
                 $item->resto = 5 - $item->avaliacao;

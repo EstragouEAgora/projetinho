@@ -313,4 +313,9 @@
     -ms-appearance: none;
     -o-appearance: none;
     outline: none;
+  
+}
+
+#toggleNovoValor:checked + #card-descricao-valor {
+  display: block;
 }
