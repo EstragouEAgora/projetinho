@@ -13,10 +13,10 @@
                         <p class="h5 card-title">
                             <span style="color: #3c5bbf; font-weight: bold;">{{ $candidato->apelido }}</span>
                         </p>
-                        <p class="card-text"><b>Telefone:</b>{{ $candidato->telefone }}</p>
-                        <p class="card-text"><b>Email:</b>{{ $candidato->mail }}</p>
+                        <p class="card-text"><b>Telefone: </b>{{ $candidato->telefone }}</p>
+                        <p class="card-text"><b>Email: </b>{{ $candidato->email }}</p>
                     </div>
-                    <a href="">
+                    <a href="/pedidos/salvar/{{ $candidato['user_id'] }}/{{ $candidato['pedido_id']}}">
                         <button class="btn btn-secondary" id="botaozin-padrao">Salvar</button>
                     </a>
                 </div>

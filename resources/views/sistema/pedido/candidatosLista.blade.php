@@ -7,30 +7,58 @@
 
         @if (isset($candidatos))
             @forelse ($candidatos as $item)
-                <div class="row">
-                    <div class="col-md-12 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <img class="h5 card-icon" src="/storage/{{ $item->user->fotoPerfil }}">
-                                <p class="h5 card-title">
-                                    <span
-                                        style="color: #3c5bbf; font-weight: bold;">{{ $item->user->name }}</span>
-                                </p>
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <img class="h5 card-icon" src="/storage/{{ $item->user->fotoPerfil }}"
+                                style="max-width: 180px; max-height: 300px">
+                            <p class="h5 card-title">
+                                <span style="color: #3c5bbf; font-weight: bold;">{{ $item->user->name }}</span>
+                            </p>
+                            @if ($item->status != 1)
                                 <p class="card-text"><b>Descrição:</b>{{ $item->pedido->descricaoPedido }}</p>
                                 <p class="card-text"><b>Valor Proposto:</b> R$ {{ $item->novoValor }}</p>
-                            </div>
-                            <a href="/pedidos/aceitar/{{ $item['user_id'] }}/ {{ $item->pedido['id']}}">
-                                <button class="btn btn-secondary" id="botaozin-padrao">Aceitar</button>
-                            </a>
+                            @else
+                                <p class="card-text"><b>Telefone: </b>{{ $item->user->telefone }}</p>
+                                <p class="card-text"><b>Email: </b>{{ $item->user->email }}</p>
+                            @endif
+                            @if ($item->avaliacao != 5)
+                                @if ($item->avaliacao == 0)
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    <p>Ainda não avaliado!</p>
+                                @else
+                                    @for ($i = 0; $i < $item->avaliacao; $i++)
+                                        <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
+                                    @endfor
+                                    @for ($i = 0; $i < $item->resto; $i++)
+                                        <img src="{{ asset('storage/imagens/star.svg') }}" style="width: 2rem;">
+                                    @endfor
+                                @endif
+                            @else
+                                @for ($i = 0; $i < $item->avaliacao; $i++)
+                                    <img src="{{ asset('storage/imagens/star-fill.svg') }}" style="width: 2rem;">
+                                @endfor
+                            @endif
+                            @if ($item->status != 1)
+                                <a href="/pedidos/aceitar/{{ $item['user_id'] }}/{{ $item['pedido_id'] }}">
+                                    <button class="btn btn-secondary" id="botaozin-padrao">Aceitar</button>
+                                </a>
+                            @else
+                                <a href="/dashboard/avaliar/{{ $item['user_id'] }}/{{$item['pedido_id']}}">
+                                    <button class="btn btn-secondary" id="botaozin-padrao">
+                                        Avaliar
+                                    </button>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @empty
-                    <p><b>Nenhum prestador se candidatou ao seu pedido ainda...<b></p>
+                    <p id="subtitulo-da-pagina"><b>Nenhum prestador se candidatou ao seu pedido ainda...<b></p>
             @endforelse
         @endif
-
     </div>
 @endsection
-
-
-<div class="row">

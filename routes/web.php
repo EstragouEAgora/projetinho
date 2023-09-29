@@ -75,6 +75,8 @@ Route::post('/pedidos/enviar', [App\Http\Controllers\controladorPedido::class, '
 
 Route::get('/pedidos/aceitar/{user_id}/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'aceitar'])->name('aceitarPedido');
 
+Route::get('/pedidos/salvar/{user_id}/{pedido_id}', [App\Http\Controllers\controladorPedido::class, 'apagarCandidatos']);
+
 // Controller do Candidato
 
 Route::post('/dashboard/pedidos/candidatar/{pedido_id}', [App\Http\Controllers\controladorCandidatos::class, 'store'])->name('candidatar');

@@ -67,7 +67,7 @@
                     </a>
                 </li>
             @endif
-            @if (Auth::user()->tipo == 1)
+            @if (Auth::user()->tipo == 4)
                 <li class="nav-item active flex-sm-fill" id="navbar-topicos">
                     <a class="nav-link" href="{{ route('avaliaCliente') }}" id="navbar-topicos-nome">
                         <i class="bi bi-house">

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class controladorCandidatos extends Controller
 {
 
-
     /* Método que adiciona o prestador de serviço
     na lista de candidatos de determinado pedido */
     public function store(Request $request, $pedido_id)
@@ -18,7 +17,7 @@ class controladorCandidatos extends Controller
         $candidatos = Candidatos::where('pedido_id', '=', $pedido_id)->get();
         $tem = false;
         foreach ($candidatos as $item) {
-            if($item->user_id == Auth::User()->id){
+            if ($item->user_id == Auth::User()->id) {
                 $tem = true;
                 break;
             }
@@ -36,7 +35,6 @@ class controladorCandidatos extends Controller
         } else {
             return redirect('/dashboard/pedidos')->with('danger', 'Você já se candidatou para esse pedido!');
         }
-        
 
     }
 
@@ -44,12 +42,19 @@ class controladorCandidatos extends Controller
     Ele envia um array contendo os candidatos para determinado pedido */
     public function show($pedido_id)
     {
+        $candidatos = Candidatos::where('pedido_id', '=', $pedido_id)
+            ->join('users', 'candidatos.user_id', '=', 'users.id')
+            ->get();
+
+        foreach ($candidatos as $item) {
+            if ($item->avaliacao == 6) {
+                $item->avaliacao = 0;
+            }
+        }
+        $candidatos = $candidatos->sortByDesc('avaliacao');
         
-        $candidatos = Candidatos::where('pedido_id','=', $pedido_id)->get();
         return view('sistema.pedido.candidatosLista', compact('candidatos'));
     }
-
-    
 
     /* Apaga a lista de candidatos e redireciona para
     o perfil do prestador de serviço escolhido */

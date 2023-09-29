@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidatos;
 use App\Models\Pedido;
 use App\Models\Servico;
 use App\Models\User;
-use App\Models\Candidatos;
 use App\Models\User_Servico;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class controladorPedido extends Controller
 {
@@ -45,19 +45,25 @@ class controladorPedido extends Controller
         return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
     }
 
-
     public function aceitar(Request $request, $user_id, $pedido_id)
     {
-        $candidato = User::find($user_id);
-        $dados = Candidatos::where('pedido_id','=',$pedido_id)->get();
-        if (isset($dados)) {
-            $dados->delete();
-            return view('sistema.pedido.candidatoAceito', compact('candidato','aceitar'));
-        } else {
-            return redirect('/dashboard/pedidos')->with('danger', 'Não foi possível aceitar esse candidato! Tente novamente mais tarde!');
-        }
+        $candidato = Candidatos::where('pedido_id', '=', $pedido_id)
+            ->where('user_id', '=', $user_id)
+            ->join('users', 'candidatos.user_id', '=', 'users.id')->get();
+        return view('sistema.pedido.candidatoAceito', compact('candidato'));
     }
 
+    public function apagarCandidatos(Request $request, $user_id, $pedido_id)
+    {
+        $candidato = User::find($user_id);
+        $dados = Candidatos::where('pedido_id', '=', $pedido_id)
+            ->where('user_id', '=', $user_id)->first();
+        $dados->status = 1;
+        $dados->save();
+        $outrosDados = Candidatos::where('pedido_id', '=', $pedido_id)
+            ->where('user_id', '!=', $user_id)->delete();
+        return redirect('/dashboard/candidatos/$pedido_id')->with('success', 'Prestador aceito com sucesso!');
+    }
 
     /* A depender do tipo de usuário:
     1 - Cliente
@@ -147,8 +153,6 @@ class controladorPedido extends Controller
     }
      */
     }
-
-
 
     /* Apagar o pedido */
     public function destroy(string $id)

@@ -4,7 +4,7 @@
     <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Avaliando Prestador</b></p>
     <p id="subtitulo-da-pagina"> Avalie o prestador abaixo de acordo com sua experiência!</p>
     <div class="card" id="card-descricao-servico">
-        <form method="POST" action="/dashboard/avaliando/{{ $dados->id }}">
+        <form method="POST" action="/dashboard/avaliando/{{ $dados->id }}/{{$dados->pedido}}">
             @csrf
             <div class="form-group">
                 <label for="avaliacao" class="h4 label-align"

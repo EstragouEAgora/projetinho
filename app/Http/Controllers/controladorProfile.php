@@ -121,17 +121,18 @@ class controladorProfile extends Controller
         return view('sistema.avaliacao.avaliacaoCliente', compact('dados'));
     }
 
-    public function editAv(string $id)
+    public function editAv(string $id, $pedido_id)
     {
         $dados = User::find($id);
+        $dados->pedido = $pedido_id;
         if (isset($dados)) {
             return view('sistema.avaliacao.avaliarPrestador', compact('dados'));
         } else {
-            return redirect('/dashboard/avaliacao')->with('danger', 'Não será possível avaliar Prestador!');
+            return redirect('/home')->with('danger', 'Não será possível avaliar Prestador!');
         }
     }
 
-    public function updateAv(Request $request, $id)
+    public function updateAv(Request $request, $id, $pedido_id)
     {
         $dados = User::find($id);
         $novaAv = $request->input('avaliacao');
@@ -147,7 +148,8 @@ class controladorProfile extends Controller
             $dados->password = $dados->password;
             $dados->fotoPerfil = $dados->fotoPerfil;
             $dados->save();
-            return redirect('/dashboard/avaliacao')->with('success', 'Avaliação registrada com sucesso!');
+            $user_id = $id;
+            return redirect('/pedidos/aceitar/$user_id/$pedido_id')->with('success', 'Avaliação registrada com sucesso!');
         } else {
             return redirect('/dashboard/avaliacao')->with('danger', 'Não foi possível gravar sua avaliação!');
         }
