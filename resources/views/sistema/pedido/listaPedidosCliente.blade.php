@@ -9,6 +9,10 @@
                 <div class="col-md-12 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body">
+                            @if ($item->fotoPedido != '')
+                                <img class="h5 card-icon" src="/storage/{{ $item->fotoPedido }}"
+                                style="max-width: 180px; max-height: 300px">
+                            @endif
                             <p class="h5 card-title">
                                 <span style="color: #3c5bbf; font-weight: bold;">{{ $item->servico['nomeServico'] }}</span>
                             </p>

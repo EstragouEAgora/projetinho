@@ -17,7 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('servico_id');
             $table->foreign('servico_id')->references('id')->on('servicos');
             $table->string('descricaoPedido');
+            $table->string('fotoPedido');
             $table->float('valorPedido');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

@@ -28,11 +28,15 @@
                                     <span
                                         style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
                                 </p>
+                                @if ($value->fotoPedido != '')
+                                    <img class="h5 card-icon" src="/storage/{{ $value->fotoPedido }}"
+                                        style="max-width: 180px; max-height: 300px">
+                                @endif
                                 <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
                                 <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
                                 <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
                                     @csrf
-                                    <div class="campo-novo-valor" style="display: none;">
+                                    <div class="campo-novo-valor" style="display: none;" id="campo-novo-valor-{{ $value->id }}">
                                         <label for="novoValor" class="h4 label-align"
                                             style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor
                                             (R$)
@@ -47,7 +51,8 @@
                                         <button class="btn btn-secondary" id="botaozin-padrao">Candidatar-me</button>
                                     </div>
                                     <div class="campo-novo-valor">
-                                        <a href="#" class="btn btn-secondary botao-candidatar" data-id="{{ $value->id }}"> Candidatar-me </a>
+                                        <a class="btn btn-secondary botao-candidatar" id="botaozin-padrao"
+                                            data-id={{ $value->id }}> Candidatar-me </a>
                                     </div>
                                 </form>
                             </div>
@@ -64,20 +69,27 @@
 @endsection
 @section('javascript')
     <script>
-        const botoesCandidatar = document.querySelectorAll('.botao-candidatar');
+        document.addEventListener('DOMContentLoaded', function() {
+            const botoesCandidatar = document.querySelectorAll('.botao-candidatar');
 
-        botoesCandidatar.forEach(botao => {
-            botao.addEventListener('click', function() {
-                const id = botao.getAttribute('data-id');
-                const campoNovoValor = document.querySelector(`#campo-novo-valor-${id}`);
+            botoesCandidatar.forEach(botao => {
+                botao.addEventListener('click', function() {
+                    const id = botao.getAttribute('data-id');
+                    const campoNovoValor = document.querySelector(`#campo-novo-valor-${id}`);
 
-                if (campoNovoValor.style.display === 'none' || campoNovoValor.style.display === '') {
-                    campoNovoValor.style.display = 'block';
-                    botao.innerText = 'Cancelar';
-                } else {
-                    campoNovoValor.style.display = 'none';
-                    botao.innerText = 'Candidatar-me';
-                }
+                    if (campoNovoValor) {
+                        if (campoNovoValor.style.display === 'none' || campoNovoValor.style
+                            .display === '') {
+                            campoNovoValor.style.display = 'block';
+                            botao.innerText = 'Cancelar';
+                        } else {
+                            campoNovoValor.style.display = 'none';
+                            botao.innerText = 'Candidatar-me';
+                        }
+                    } else {
+                        console.log(`Elemento com ID 'campo-novo-valor-${id}' não encontrado.`);
+                    }
+                });
             });
         });
     </script>

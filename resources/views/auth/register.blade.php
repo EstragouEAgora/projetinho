@@ -17,6 +17,7 @@
                             <i class="bi bi-person-fill">
                                 <img src="{{ asset('storage/imagens/person-fill.svg') }}" />
                             </i>
+                            <span class="label-text">Nome Completo</span>
                         </label>
                         <div class="col-md-4 ">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -34,6 +35,7 @@
                             <i class="bi bi-envelope-fill">
                                 <img src="{{ asset('storage/imagens/envelope-fill.svg') }}" />
                             </i>
+                            <span class="label-text">Email</span>
                         </label>
                         <div class="col-md-4">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -52,10 +54,11 @@
                             <i class="bi bi-telephone-fill">
                                 <img src="{{ asset('storage/imagens/telephone-fill.svg') }}" />
                             </i>
+                            <span class="label-text">Telefone</span>
                         </label>
                         <div class="col-md-4">
-                            <input id="telmask" type="text" class="telefone form-control" name="telefone" required
-                                autocomplete="telefone" placeholder="(35) 99999-9999">
+                            <input id="telefone" type="text" class="telmask telefone form-control" name="telefone"
+                                required autocomplete="telefone" placeholder="(35) 99999-9999">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -63,6 +66,7 @@
                             <i>
                                 <img src="{{ asset('storage/imagens/key-fill.svg') }}" />
                             </i>
+                            <span class="label-text">Senha (mínimo 8 caracteres)</span>
                         </label>
                         <div class="col-md-4">
                             <input id="password" type="password"
@@ -81,6 +85,7 @@
                             <i>
                                 <img src="{{ asset('storage/imagens/key-fill.svg') }}" />
                             </i>
+                            <span class="label-text">Confirmar senha</span>
                         </label>
                         <div class="col-md-4">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
@@ -120,7 +125,32 @@
     <script type="module">
         $().ready(function() {
             let telmask = new Inputmask('(99) 99999-9999')
-            telmask.mask("#telmask");
+            telmask.mask(".telmask");
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputFields = document.querySelectorAll('.form-control');
+
+            inputFields.forEach(inputField => {
+                inputField.addEventListener('focus', function() {
+                    const label = this.parentElement.querySelector('label[for="' + this.id + '"]');
+                    if (label) {
+                        label.classList.add('active-label');
+                    }
+                });
+
+                inputField.addEventListener('blur', function() {
+                    const label = this.parentElement.querySelector('label[for="' + this.id + '"]');
+                    if (label && this.value === '') {
+                        label.classList.remove('active-label');
+                    }
+                });
+
+                // Verificar o estado inicial dos campos
+                const label = inputField.parentElement.querySelector('label[for="' + inputField.id + '"]');
+                if (label && inputField.value !== '') {
+                    label.classList.add('active-label');
+                }
+            });
         });
     </script>
 @endsection

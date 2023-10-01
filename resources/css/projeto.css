@@ -319,3 +319,22 @@
 #toggleNovoValor:checked + #card-descricao-valor {
   display: block;
 }
+
+.active-label {
+  font-size: 12px;
+  transform: translateY(-20px);
+  color: #fff; 
+}
+
+.label-text {
+  display: none;
+}
+
+.form-control:focus + .label-text,
+.form-control:not(:placeholder-shown) + .label-text {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 12px;
+  transform: translateY(-20px);
+  color: #fff;
+}

@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class controladorServico extends Controller
 {
+    /* Contém as regras de validação */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nomeServico' => ['required', 'string', 'min:4'],
+        ]);
+    }
 
     /* Método que direciona para a página
     do dashboardAdm */
@@ -28,6 +36,12 @@ class controladorServico extends Controller
     Na parte da foto, ele grava apenas o caminho (url) */
     public function store(Request $request)
     {
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect("/servicos/novo")
+                ->withErrors($validator)
+                ->withInput();
+        }
         $path = $request->file('arquivo')->store('imagens', 'public');
         $dados = new Servico();
         $dados->nomeServico = $request->input('nomeServico');
@@ -56,6 +70,12 @@ class controladorServico extends Controller
     /* Atualiza o serviço no Banco de Dados */
     public function update(Request $request, $id)
     {
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect("/servico/editar/$id")
+                ->withErrors($validator)
+                ->withInput();
+        }
         $dados = Servico::find($id);
         if (isset($dados)) {
             $dados->nomeServico = $request->input('nomeServico');

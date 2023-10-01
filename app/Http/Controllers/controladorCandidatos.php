@@ -31,9 +31,9 @@ class controladorCandidatos extends Controller
             $dados->novoValor = $valor;
             $dados->status = 0;
             $dados->save();
-            return redirect('/dashboard/pedidos')->with('success', 'Você se candidatou com sucesso!');
+            return redirect('/home')->with('success', 'Você se candidatou com sucesso!');
         } else {
-            return redirect('/dashboard/pedidos')->with('danger', 'Você já se candidatou para esse pedido!');
+            return redirect('/home')->with('danger', 'Você já se candidatou para esse pedido!');
         }
 
     }

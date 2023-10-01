@@ -9,9 +9,20 @@ use App\Models\User;
 use App\Models\User_Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class controladorPedido extends Controller
 {
+    /* Contém as regras de validação */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'descricaoPedido' => ['required', 'string', 'min:7'],
+        ]);
+    }
+
     /* Envia para a página de cadastro de pedido
     Junto com o dado do "servico_id" */
     public function create($servico_id)
@@ -29,11 +40,23 @@ class controladorPedido extends Controller
     informando o status da operação  */
     public function store(Request $request)
     {
+        $idSer = session('idSer');
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect("/pedidos/$idSer")
+                ->withErrors($validator)
+                ->withInput();
+        }
         $dados = new Pedido();
         $dados->user_id = Auth::User()->id;
-        $idSer = session('idSer');
         $dados->servico_id = $idSer;
         $dados->descricaoPedido = $request->input('descricaoPedido');
+        if (null !== $request->file('arquivo')) {
+            $path = $request->file('arquivo')->store('imagens', 'public');
+            $dados->fotoPedido = $path;
+        } else {
+            $dados->fotoPedido = '';
+        }
         if (null !== $request->input('valorPedido')) {
             $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
             $valor = (double) $valor;
@@ -41,8 +64,10 @@ class controladorPedido extends Controller
         } else {
             $dados->valorPedido = 0.0;
         }
+        $dados->status = 0;
         $dados->save();
-        return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
+        return redirect("/pedidos/enviar/mail/$dados->id");
+        //return redirect('/dashboard/pedidos')->with('success', 'Seu pedido foi cadastrado com sucesso!');
     }
 
     public function aceitar(Request $request, $user_id, $pedido_id)
@@ -75,13 +100,8 @@ class controladorPedido extends Controller
      */
     public function listaPedidos()
     {
-        if (Auth::User()->tipo == '1') {
-            $pedidos = Pedido::where('user_id', Auth::User()->id)->with('servico')->get();
-            return view('sistema.pedido.listaPedidosCliente', compact('pedidos'));
-        } elseif (Auth::User()->tipo == '2') {
-            $servicos = User_Servico::where('user_id', Auth::User()->id)->get();
-            return view('sistema.dashboard.dashboardPrestador', compact('servicos'));
-        }
+        $pedidos = Pedido::where('user_id', Auth::User()->id)->with('servico')->get();
+        return view('sistema.pedido.listaPedidosCliente', compact('pedidos'));
     }
 
     /* Envia para uma página de edição do pedido */
@@ -99,9 +119,21 @@ class controladorPedido extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect("/pedidos/editar/$id")
+                ->withErrors($validator)
+                ->withInput();
+        }
         $pedido = Pedido::find($id);
         if (isset($pedido)) {
             $pedido->descricaoPedido = $request->input('descricaoPedido');
+            if (null !== $request->file('arquivo')) {
+                $path = $request->file('arquivo')->store('imagens', 'public');
+                $dados->fotoServico = $path;
+            } else {
+                $pedido->fotoPedido = $pedido->fotoPedido;
+            }
             if (null !== $request->input('valorPedido')) {
                 $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
                 $valor = (double) $valor;
@@ -109,6 +141,7 @@ class controladorPedido extends Controller
             } else {
                 $pedido->valorPedido = 0.0;
             }
+            $pedido->status = 0;
             $pedido->save();
         } else {
             return redirect('/dashboard/pedidos')->with('danger', 'Erro ao editar seu pedido');
@@ -119,39 +152,38 @@ class controladorPedido extends Controller
     /* Envia email para os Prestadores de Serviço */
     public function enviarEmail(Request $request, string $id)
     {
-        /*$pedidos = Pedido::find($id);
-    $servico = $pedidos->servico_id;
-    $users = User_Servico::where('servico_id', $servico)->get();
-    if (isset($users)) {
-    $mail->isSMTP();  //Define o uso de SMTP no envio
-    $mail->SMTPAuth = true; //Habilita a autenticação SMTP
-    $mail->Username= 'projetoestragoueagora@gmail.com';
-    $mail->Password   = 'TCC_2023';
-    // Criptografia do envio SSL também é aceito
-    $mail->SMTPSecure = 'tls';detalhes
-    // Informações específicadas pelo Google
-    $mail->Host = 'smtp.email.com';
-    $mail->Port = 587;
-    // Define o remetente
-    $mail->setFrom('projetoestragoueagora@gmail.com', ' Estragou, e agora?');
-    foreach ($users as $item) {
-    $email = $item->user->email;
-    $apelido = $item->user->apelido;
-    $mail->addAddress($email, $apelido); // Define o destinatário
-    // Conteúdo da mensagem
-    $mail->isHTML(true);  // Seta o formato do e-mail para aceitar conteúdo HTML
-    $mail->Subject = 'Novo Pedido para Você!';
-    $mail->Body    = 'Olá, {{$apelido}}, você tem um novo pedido do serviço de {{$item->servico->nomeServico}}
-    Entre agora no nosso site! Não perca essa oportunidade!';
-    $mail->AltBody = 'Olá! Você tem um novo pedido no Estragou e agora!';
-    // Enviar
-    $mail->send();
-    }
-    return redirect('/home')->with('success', 'Seu pedido foi cadastrado com sucesso!');
-    } else {
-    return redirect('/home')->with('danger', 'Não foi possível cadastrar seu pedido!');
-    }
-     */
+        $mail = new PHPMailer(true);
+        $pedidos = Pedido::find($id);
+        $servico = $pedidos->servico_id;
+        $users = User_Servico::where('servico_id', $servico)->get();
+        if ($users->isNotEmpty()) {
+            $mail->isSMTP(); //Define o uso de SMTP no envio
+            $mail->SMTPAuth = true; //Habilita a autenticação SMTP
+            $mail->Username = 'projetoestragoueagora@gmail.com';
+            $mail->Password = 'TCC_2023';
+            // Criptografia do envio SSL também é aceito
+            $mail->SMTPSecure = 'tls';
+            // Informações específicadas pelo Google
+            $mail->Host = 'smtp.email.com';
+            $mail->Port = 587;
+            // Define o remetente
+            $mail->setFrom('projetoestragoueagora@gmail.com', ' Estragou, e agora?');
+            foreach ($users as $item) {
+                $email = $item->user->email;
+                $apelido = $item->user->apelido;
+                $mail->addAddress($email, $apelido); // Define o destinatário
+                // Conteúdo da mensagem
+                $mail->isHTML(true); // Seta o formato do e-mail para aceitar conteúdo HTML
+                $mail->Subject = 'Novo Pedido para Você!';
+                $mail->Body = $mail->Body = 'Olá, ' . $apelido . ', você tem um novo pedido do serviço de ' . $item->servico->nomeServico . '. Entre agora no nosso site! Não perca essa oportunidade!';
+                $mail->AltBody = 'Olá! Você tem um novo pedido no Estragou e agora!';
+                // Enviar
+                $mail->send();
+            }
+            return redirect('/dashboard/pedidos')->with('success', 'Seu pedido foi cadastrado com sucesso!');
+        } else {
+            return redirect('/dashboard/pedidos')->with('danger', 'Não foi possível cadastrar seu pedido!');
+        }
     }
 
     /* Apagar o pedido */
