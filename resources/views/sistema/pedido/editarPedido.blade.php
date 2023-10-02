@@ -61,7 +61,7 @@
 
                 <div style="display: flex; justify-content: flex-end">
                     <button id="botaozin-padrao">
-                        <a id="link-sem-sublinhado" style="color: white"href="/dashboard/Adm">Cancelar</a>
+                        <a id="link-sem-sublinhado" style="color: white"href="/home">Cancelar</a>
 
                     </button>
                     <button id="botaozin-padrao">

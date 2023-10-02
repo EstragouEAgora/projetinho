@@ -77,10 +77,12 @@ class controladorPedido extends Controller
             ->where('user_id', '=', $user_id)
             ->join('users', 'candidatos.user_id', '=', 'users.id')->get();
         $pedido = Pedido::find($pedido_id);
-        echo $pedido;
-        /*$pedido->status = 1;
+        $pedido->descricaoPedido = $pedido->descricaoPedido;
+        $pedido->endereco = $pedido->endereco;
+        $pedido->fotoPedido = $pedido->fotoPedido;
+        $pedido->status = 1;
         $pedido->save();
-        return view('sistema.pedido.candidatoAceito', compact('candidato'));*/
+        return view('sistema.pedido.candidatoAceito', compact('candidato'));
     }
 
     public function apagarCandidatos(Request $request, $user_id, $pedido_id)

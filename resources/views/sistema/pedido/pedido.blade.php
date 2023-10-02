@@ -21,19 +21,22 @@
                         </span>
                     @enderror
                 </div>
-            </div>
 
-            <label for="endereco" class="h4 label-align" style="margin-left: 10px; margin-right: 30px;">Endereço onde deve
-                ser realizado:</label>
-            <input type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco" required
-                autocomplete="endereco" style="border-radius: 20px; background-color: #EFF2FB">
-            @error('endereco')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+                <div class="form-group">
+                    <label for="endereco" class="h4 label-align" style="margin-left: 10px; margin-right: 30px;">Endereço
+                        onde
+                        deve
+                        ser realizado:</label>
+                    <input type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco"
+                        required autocomplete="endereco" style="border-radius: 20px; background-color: #EFF2FB">
+                    @error('endereco')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-           
+                <div class="form-group">
                     <label for="arquivo" id="card-descricao-valor">
                         <p class="h5">Adicione uma foto (opcional):</p>
                     </label>
