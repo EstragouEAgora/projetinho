@@ -12,8 +12,8 @@
                 <p id="card-descricao-label-subtitulo">Descreva o que que você precisa detalhadamente, assim conseguimos os
                     melhores pra você!</p>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="text" class="form-control @error('descricaoPedido') is-invalid @enderror" name="descricaoPedido" required
-                        autocomplete="descricaoPedido"
+                    <input type="text" class="form-control @error('descricaoPedido') is-invalid @enderror"
+                        name="descricaoPedido" required autocomplete="descricaoPedido"
                         style="border-radius: 20px; background-color: #EFF2FB; padding-bottom: 100px">
                     @error('descricaoPedido')
                         <span class="invalid-feedback" role="alert">
@@ -23,12 +23,25 @@
                 </div>
             </div>
 
-            <label for="arquivo" id="card-descricao-valor">
-                <p class="h5">Adicione uma foto (opcional):</p>
-            </label>
-            <div style="margin-left: 10px; margin-right: 30px;">
-                <input type="file" class="form-control" name="arquivo"
-                    style="border-radius: 40px; background-color: #EFF2FB">
+            <label for="endereco" class="h4 label-align" style="margin-left: 10px; margin-right: 30px;">Endereço onde deve
+                ser realizado:</label>
+            <input type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco" required
+                autocomplete="endereco" style="border-radius: 20px; background-color: #EFF2FB">
+            @error('endereco')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+
+           
+                    <label for="arquivo" id="card-descricao-valor">
+                        <p class="h5">Adicione uma foto (opcional):</p>
+                    </label>
+                    <div style="margin-left: 10px; margin-right: 30px;">
+                        <input type="file" class="form-control" name="arquivo"
+                            style="border-radius: 40px; background-color: #EFF2FB">
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">

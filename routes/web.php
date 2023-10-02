@@ -108,6 +108,6 @@ Route::post('/dashboard/perfil/atualizar/{id}', [App\Http\Controllers\controlado
 
 Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::class, 'avaliacao'])->name('avaliaCliente');
 
-Route::get('/dashboard/avaliar/{id}', [App\Http\Controllers\controladorProfile::class, 'editAv'])->name('Avaliar');
+Route::get('/dashboard/avaliar/{id}/{pedido_id}', [App\Http\Controllers\controladorProfile::class, 'editAv'])->name('Avaliar');
 
-Route::post('/dashboard/avaliando/{id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');
+Route::post('/dashboard/avaliando/{id}/{pedido_id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');

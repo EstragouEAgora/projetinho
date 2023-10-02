@@ -21,8 +21,6 @@ data[15] = "DB_PASSWORD=" + "cefetmg" +"\n"
 with open('.env', 'w') as file:
     file.writelines(data)
 
-system('php artisan migrate:refresh')
-
 system('php artisan key:generate')
 
 sistema = platform.system()
