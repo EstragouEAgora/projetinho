@@ -224,7 +224,8 @@
   color: white;
   background-color:#3C5BBF;
   border-radius: 85px;
-  margin: 15px;
+  margin: 12px;
+  margin-left: 3px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-color: #3C5BBF;

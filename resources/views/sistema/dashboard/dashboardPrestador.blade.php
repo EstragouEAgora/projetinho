@@ -49,7 +49,7 @@
                                                 style="border-radius: 40px; background-color: #EFF2FB"
                                                 value={{ $value->valorPedido }}>
                                         </div>
-                                        <button class="btn btn-secondary" id="botaozin-padrao">Candidatar-me</button>
+                                        <button class="btn btn-secondary" id="botaozin-padrao" >Candidatar-me</button>
                                     </div>
                                     <div class="campo-novo-valor">
                                         <a class="btn btn-secondary botao-candidatar" id="botaozin-padrao"

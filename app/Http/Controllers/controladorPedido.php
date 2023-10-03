@@ -136,8 +136,12 @@ class controladorPedido extends Controller
         if (isset($pedido)) {
             $pedido->descricaoPedido = $request->input('descricaoPedido');
             $pedido->endereco = $request->input('endereco');
-            $path = $request->file('arquivo')->store('imagens', 'public');
-            $pedido->fotoPedido = $path;
+            if (null !== $request->file('arquivo')) {
+                $path = $request->file('arquivo')->store('imagens', 'public');
+                $pedido->fotoPedido = $path;
+            } else {
+                $pedido->fotoPedido = $pedido->fotoPedido;
+            }
             if (null !== $request->input('valorPedido')) {
                 $valor = str_replace(',', '.', preg_replace('/[^0-9,]/', '', $request->input('valorPedido')));
                 $valor = (double) $valor;
