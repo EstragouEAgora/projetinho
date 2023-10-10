@@ -9,7 +9,7 @@ class Pedido extends Model
 {
     use HasFactory;
     // Permite a alteração da descrição e do valor
-    protected $fillable=['descricaoPedido','fotoPedido','valorPedido','status'];
+    protected $fillable=['descricaoPedido','fotoPedido','endereco','valorPedido','status'];
 
     // Define relacionamento de dependência com a tabela "users"
     public function user(){

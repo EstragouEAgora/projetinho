@@ -4,19 +4,19 @@
     <div class="container">
         <p class="h1 text-start" id="titulo-da-pagina"><b>Candidatos</b></p>
         <p id="subtitulo-da-pagina">Esse número <b>não</b> ficará disponível novamente!</p>
-        <p class="danger">Para entrar em contato com {{$candidato->apelido}}, chame no WhatsApp utilizando esse telefone ou mande um e-mail!</p>
+        <p class="danger">Para entrar em contato com {{ $candidato[0]->apelido }}, chame no WhatsApp utilizando esse telefone ou mande um e-mail!</p>
         <div class="row">
             <div class="col-md-12 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <img class="h5 card-icon" src="/storage/{{ $candidato->fotoPerfil }}">
+                        <img class="h5 card-icon" src="/storage/{{ $candidato[0]->fotoPerfil }}">
                         <p class="h5 card-title">
-                            <span style="color: #3c5bbf; font-weight: bold;">{{ $candidato->apelido }}</span>
+                            <span style="color: #3c5bbf; font-weight: bold;">{{ $candidato[0]->apelido }}</span>
                         </p>
-                        <p class="card-text"><b>Telefone: </b>{{ $candidato->telefone }}</p>
-                        <p class="card-text"><b>Email: </b>{{ $candidato->email }}</p>
+                        <p class="card-text"><b>Telefone: </b>{{ $candidato[0]->telefone }}</p>
+                        <p class="card-text"><b>Email: </b>{{ $candidato[0]->email }}</p>
                     </div>
-                    <a href="/pedidos/salvar/{{ $candidato['user_id'] }}/{{ $candidato['pedido_id']}}">
+                    <a href="/pedidos/salvar/{{ $candidato[0]->user_id }}/{{ $candidato[0]->pedido_id}}">
                         <button class="btn btn-secondary" id="botaozin-padrao">Salvar</button>
                     </a>
                 </div>

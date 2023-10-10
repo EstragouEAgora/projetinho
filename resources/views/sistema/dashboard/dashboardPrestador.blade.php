@@ -33,6 +33,7 @@
                                         style="max-width: 180px; max-height: 300px">
                                 @endif
                                 <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
+                                <p class="card-text"><b>Endereço:</b>{{ $value->endereco }}</p>
                                 <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
                                 <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
                                     @csrf
@@ -48,7 +49,7 @@
                                                 style="border-radius: 40px; background-color: #EFF2FB"
                                                 value={{ $value->valorPedido }}>
                                         </div>
-                                        <button class="btn btn-secondary" id="botaozin-padrao">Candidatar-me</button>
+                                        <button class="btn btn-secondary" id="botaozin-padrao" >Candidatar-me</button>
                                     </div>
                                     <div class="campo-novo-valor">
                                         <a class="btn btn-secondary botao-candidatar" id="botaozin-padrao"

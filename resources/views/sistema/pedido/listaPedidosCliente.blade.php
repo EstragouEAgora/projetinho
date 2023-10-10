@@ -16,7 +16,8 @@
                             <p class="h5 card-title">
                                 <span style="color: #3c5bbf; font-weight: bold;">{{ $item->servico['nomeServico'] }}</span>
                             </p>
-                            <p class="card-text"><b>Descrição:</b> {{ $item['descricaoPedido'] }}</p>
+                            <p class="card-text"><b>Descrição:</b> {!! nl2br(e($item->descricaoPedido)) !!}</p>
+                            <p class="card-text"><b>Endereço:</b> {{ $item['endereco'] }}</p>
                             <p class="card-text"><b>Valor:</b> R$ {{ $item['valorPedido'] }}</p>
                             <a href="/dashboard/candidatos/{{ $item->id }}">
                                 <button class="btn btn-secondary" id="botaozin-padrao"> Candidatos </button>

@@ -127,7 +127,7 @@ class controladorProfile extends Controller
         return view('sistema.avaliacao.avaliacaoCliente', compact('dados'));
     }
 
-    public function editAv(string $id, $pedido_id)
+    public function editAv(string $id, string $pedido_id)
     {
         $dados = User::find($id);
         $dados->pedido = $pedido_id;
@@ -138,7 +138,7 @@ class controladorProfile extends Controller
         }
     }
 
-    public function updateAv(Request $request, $id, $pedido_id)
+    public function updateAv(Request $request, string $id, string $pedido_id)
     {
         $dados = User::find($id);
         $novaAv = $request->input('avaliacao');

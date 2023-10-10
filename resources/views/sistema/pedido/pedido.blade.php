@@ -12,28 +12,46 @@
                 <p id="card-descricao-label-subtitulo">Descreva o que que você precisa detalhadamente, assim conseguimos os
                     melhores pra você!</p>
                 <div style="margin-left: 10px; margin-right: 30px;">
-                    <input type="text" class="form-control @error('descricaoPedido') is-invalid @enderror" name="descricaoPedido" required
-                        autocomplete="descricaoPedido"
-                        style="border-radius: 20px; background-color: #EFF2FB; padding-bottom: 100px">
+                    <textarea class="form-control @error('descricaoPedido') is-invalid @enderror" name="descricaoPedido" required
+                        autocomplete="descricaoPedido" style="border-radius: 20px; background-color: #EFF2FB;">{{ $dados['descricaoPedido'] }}</textarea>
                     @error('descricaoPedido')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
-            </div>
 
-            <label for="arquivo" id="card-descricao-valor">
-                <p class="h5">Adicione uma foto (opcional):</p>
-            </label>
-            <div style="margin-left: 10px; margin-right: 30px;">
-                <input type="file" class="form-control" name="arquivo"
-                    style="border-radius: 40px; background-color: #EFF2FB">
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco" class="h4 label-align"
+                        style="margin-left: 10px;margin-top: 20px;margin-top: 20px;">Endereço:</label>
+                    <p id="card-descricao-label-subtitulo">Ex.: R. Estragou e agora, 687, B. Estragou, casa.</p>
+                    <input type="text" class="form-control @error('endereco') is-invalid @enderror" name="endereco"
+                        required autocomplete="endereco"
+                        style="border-radius: 40px; background-color: #EFF2FB; margin-left: 10px; width: 95%">
+                    @error('endereco')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="arquivo" id="card-descricao-valor">
+                        <label for="endereco" class="h4 label-align" style="margin-top: 20px;">Adicione uma foto
+                            (opcional):</label>
+
+                    </label>
+                    <div style="margin-left: 10px; margin-right: 30px;">
+                        <input type="file" class="form-control" name="arquivo"
+                            style="border-radius: 40px; background-color: #EFF2FB">
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="valorPedido" class="h4 label-align"
-                    style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor (R$):</label>
+                    style="margin-left: 10px ;margin-right: 30px; margin-top: 20px;">Valor (R$):</label>
                 <p id="card-descricao-label-subtitulo">Digite nesse formato: 99.90</p>
                 <div id="card-descricao-valor">
                     <input id="valorPedido" type="text" class="form-control valor" name="valorPedido"
@@ -45,10 +63,10 @@
 
             <div style="display: flex; justify-content: flex-end">
                 <button id="botaozin-padrao">
-                    <a id="link-sem-sublinhado" style="color: white" href="/home">Cancelar</a>
+                    <a id="botaozin-padrao" style="margin-left: 10px; text-decoration: none" href="/home">Cancelar</a>
                 </button>
                 <button id="botaozin-padrao">
-                    <a id="link-sem-sublinhado" style="color: white">Enviar Pedido</a>
+                    <a id="botaozin-padrao" style="margin-left: 10px  ">Enviar Pedido</a>
                 </button>
             </div>
         </form>

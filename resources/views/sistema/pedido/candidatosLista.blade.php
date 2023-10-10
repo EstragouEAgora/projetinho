@@ -2,7 +2,7 @@
 @section('title', 'Candidatos | Estragou, e agora?')
 @section('content')
     <div class="container">
-        <p class="h1 text-start" id="titulo-da-pagina"><b>Candidatos</b></p>
+        <p class="h1 text-start" id="titulo-da-pagina" style="margin-top: 150px"><b>Candidatos</b></p>
         <p id="subtitulo-da-pagina">Essa é a lista dos candidatos que se disponibilizaram e o preço que eles ofertaram</p>
 
         @if (isset($candidatos))
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 @empty
-                    <p id="subtitulo-da-pagina"><b>Nenhum prestador se candidatou ao seu pedido ainda...<b></p>
+                    <p id="subtitulo-da-pagina" style="color:#3c5bbf"><b>Nenhum prestador se candidatou ao seu pedido ainda...<b></p>
             @endforelse
         @endif
     </div>
