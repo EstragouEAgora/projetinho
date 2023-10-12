@@ -18,4 +18,5 @@ Está sendo desenvolvido com:
 - <img align="center" alt="Render" height="15" width="15" src="https://intellyx.com/wp-content/uploads/2019/08/Render-cloud-intellyx-BC-logo.png" /> | Servidor API: <a href="https://render.com/">Render</a>
 
 
-<!-- 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 -->
+<!-- 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 -->
+

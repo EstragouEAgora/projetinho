@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-5">
-            <img src="{{ asset('storage/imagens/bichoAuth.png') }}" style="margin-top: 190px; width: 800px" />
+            <img src="{{ asset('storage/imagens/bichoAuth.png') }}" style="margin-top: 190px; width: 100%" />
         </div>
         <div class="col-sm-7" style="background-color: #3C5BBF">
             <div class="container">
