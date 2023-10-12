@@ -111,3 +111,9 @@ Route::get('/dashboard/avaliacao', [App\Http\Controllers\controladorProfile::cla
 Route::get('/dashboard/avaliar/{id}/{pedido_id}', [App\Http\Controllers\controladorProfile::class, 'editAv'])->name('Avaliar');
 
 Route::post('/dashboard/avaliando/{id}/{pedido_id}', [App\Http\Controllers\controladorProfile::class, 'updateAv'])->name('gravaAvaliacao');
+
+
+// Para rodar as imagens no site
+Route::get('/storage', function(){
+    return \Illuminate\Support\Facades\Artisan::call('storage:link');
+});
