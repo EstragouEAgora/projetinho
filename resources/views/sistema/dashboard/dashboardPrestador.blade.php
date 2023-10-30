@@ -20,46 +20,50 @@
         <p id="subtitulo-da-pagina">Pedidos para você! Dê uma olhada e se candidate!</p>
         @forelse ($servicos as $item)
             @foreach ($item->servico->pedido as $value)
-                <div class="row">
-                    <div class="col-md-12 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <p class="h5 card-title">
-                                    <span
-                                        style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
-                                </p>
-                                @if ($value->fotoPedido != '')
-                                    <img class="h5 card-icon" src="/storage/{{ $value->fotoPedido }}"
-                                        style="max-width: 180px; max-height: 300px">
-                                @endif
-                                <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
-                                <p class="card-text"><b>Endereço:</b>{{ $value->endereco }}</p>
-                                <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
-                                <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
-                                    @csrf
-                                    <div class="campo-novo-valor" style="display: none;" id="campo-novo-valor-{{ $value->id }}">
-                                        <label for="novoValor" class="h4 label-align"
-                                            style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor
-                                            (R$)
-                                            :</label>
-                                        <p id="card-descricao-label-subtitulo">Sugira um novo valor para tal serviço...</p>
-                                        <div id="card-descricao-valor">
-                                            <input id="novoValor" type="text" class="form-control valor" name="novoValor"
-                                                required autocomplete="valorPedido"
-                                                style="border-radius: 40px; background-color: #EFF2FB"
-                                                value={{ $value->valorPedido }}>
+                @if ($value['status'] != 1)
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="h5 card-title">
+                                        <span
+                                            style="color: #3c5bbf; font-weight: bold;">{{ $item->servico->nomeServico }}</span>
+                                    </p>
+                                    @if ($value->fotoPedido != '')
+                                        <img class="h5 card-icon" src="/storage/{{ $value->fotoPedido }}"
+                                            style="max-width: 180px; max-height: 300px">
+                                    @endif
+                                    <p class="card-text"><b>Descrição:</b>{{ $value->descricaoPedido }}</p>
+                                    <p class="card-text"><b>Endereço:</b>{{ $value->endereco }}</p>
+                                    <p class="card-text"><b>Valor:</b> R$ {{ $value->valorPedido }}</p>
+                                    <form method="POST" action="/dashboard/pedidos/candidatar/{{ $value->id }}">
+                                        @csrf
+                                        <div class="campo-novo-valor" style="display: none;"
+                                            id="campo-novo-valor-{{ $value->id }}">
+                                            <label for="novoValor" class="h4 label-align"
+                                                style="margin-left: 10px; margin-right: 30px; margin-top: 30px;">Valor
+                                                (R$)
+                                                :</label>
+                                            <p id="card-descricao-label-subtitulo">Sugira um novo valor para tal serviço...
+                                            </p>
+                                            <div id="card-descricao-valor">
+                                                <input id="novoValor" type="text" class="form-control valor"
+                                                    name="novoValor" required autocomplete="valorPedido"
+                                                    style="border-radius: 40px; background-color: #EFF2FB"
+                                                    value={{ $value->valorPedido }}>
+                                            </div>
+                                            <button class="btn btn-secondary" id="botaozin-padrao">Candidatar-me</button>
                                         </div>
-                                        <button class="btn btn-secondary" id="botaozin-padrao" >Candidatar-me</button>
-                                    </div>
-                                    <div class="campo-novo-valor">
-                                        <a class="btn btn-secondary botao-candidatar" id="botaozin-padrao"
-                                            data-id={{ $value->id }}> Candidatar-me </a>
-                                    </div>
-                                </form>
+                                        <div class="campo-novo-valor">
+                                            <a class="btn btn-secondary botao-candidatar" id="botaozin-padrao"
+                                                data-id={{ $value->id }}> Candidatar-me </a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         @empty
             <p class="h1 text-start" id="subtitulo-da-pagina"><b>Voce ainda não se cadastrou em nenhum serviço!</b></p>
