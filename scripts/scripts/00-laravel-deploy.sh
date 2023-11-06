@@ -14,3 +14,6 @@ php artisan storage:link
 
 echo "Running migrations..."
 php artisan migrate --force
+
+echo "Add data..."
+php artisan db:seed --class=DatabaseSeeder
