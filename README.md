@@ -1,6 +1,6 @@
 <div align="center">
   <h2> Estragou, e agora? </h2>
-    <h4> 📆 Previsão de entrega: 25/09/2023 </h4>
+    <h4> 📆 Previsão de entrega: 25/11/2023 </h4>
 </div>
 
 É um projeto filantrópico dos alunos do CEFET-MG (Campus Varginha).
