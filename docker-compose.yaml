@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: estragou-e-agora
+    container_name: estragou-e-agora
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: estragou-e-agora
+      SERVICE_TAGS: dev
+      DATABASE_URL: postgresql://EstragouEAgora:w7AorQDtfZR9@ep-dark-heart-86812645.us-east-2.aws.neon.tech/neondb?sslmode=require
+      DB_CONNECTION: pgsql
+      APP_KEY: base64:0SRvUDOJAJkGyjnmDkKzw447ynhX3O3gtXxtUvkbfuM=
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./storage:/var/www/html/storage
+    networks:
+      - app-network
+    ports:
+      - 8080:8080
+
+networks:
+  app-network:
+    driver: bridge
